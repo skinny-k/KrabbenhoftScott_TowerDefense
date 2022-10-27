@@ -9,25 +9,6 @@ public class GameController : MonoBehaviour
     public static event Action OnPause;
     public static event Action OnUnpause;
     
-    /*
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            Application.Quit();
-
-            if (Time.timeScale == 1)
-            {
-                Pause();
-            }
-            else if (Time.timeScale == 0)
-            {
-                Unpause();
-            }
-        }
-    }
-    */
-
     public static void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);

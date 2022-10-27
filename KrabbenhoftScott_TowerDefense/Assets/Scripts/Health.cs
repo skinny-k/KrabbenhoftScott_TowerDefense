@@ -30,10 +30,19 @@ public class Health : MonoBehaviour, IDamageable, IHealable
     public int MaxHealth
     {
         get => _maxHealth;
+        set => _maxHealth = value;
     }
     public int CurrentHealth
     {
         get => _currentHealth;
+    }
+    public float PhysicalDefenseModifier
+    {
+        set => _physicalDefenseModifier = value;
+    }
+    public float SpecialDefenseModifier
+    {
+        set => _specialDefenseModifier = value;
     }
 
     MeshRenderer _meshRenderer;

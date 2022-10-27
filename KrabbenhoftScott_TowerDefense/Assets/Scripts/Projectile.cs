@@ -4,31 +4,31 @@ using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-    [SerializeField] float _travelSpeed = 25f;
+    [SerializeField] protected float _travelSpeed = 25f;
 
-    Tower _origin;
-    Enemy _target;
-    bool _isSpecial = false;
+    protected Tower _origin;
+    protected Enemy _target;
+    protected bool _isSpecial = false;
     
-    void Update()
+    protected virtual void Update()
     {
         transform.position = Vector3.MoveTowards(transform.position, _target.transform.position, _travelSpeed * Time.deltaTime);
         transform.LookAt(_target.transform.position);
     }
 
-    void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         Impact(collision);
     }
 
-    public void InitializeProjectile(Tower origin, Enemy target, bool isSpecial)
+    public virtual void InitializeProjectile(Tower origin, Enemy target, bool isSpecial)
     {
         _origin = origin;
         _target = target;
         _isSpecial = isSpecial;
     }
 
-    void Impact(Collision collision)
+    protected virtual void Impact(Collision collision)
     {
         Enemy enemyHit = collision.gameObject.GetComponent<Enemy>();
         
@@ -41,7 +41,7 @@ public class Projectile : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    void Feedback()
+    protected virtual void Feedback()
     {
         //
     }

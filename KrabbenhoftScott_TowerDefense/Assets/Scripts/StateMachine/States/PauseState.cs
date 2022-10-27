@@ -7,13 +7,13 @@ public class PauseState : TowerDefenseState
 {
     public static event Action OnPause;
     public static event Action OnUnpause;
-    
-    bool _active = false;
+    public static bool Paused = false;
     
     public override void Enter()
     {
         Debug.Log("Entered PauseState");
         Time.timeScale = 0;
+        Paused = true;
         OnPause?.Invoke();
         SubscribeToInput();
     }
@@ -22,6 +22,7 @@ public class PauseState : TowerDefenseState
     {
         Debug.Log("Exited PauseState");
         Time.timeScale = 1;
+        Paused = false;
         OnUnpause?.Invoke();
         UnsubscribeToInput();
     }

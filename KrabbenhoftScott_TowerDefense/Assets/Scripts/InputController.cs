@@ -112,4 +112,14 @@ public class InputController : MonoBehaviour
             OnAnyKeyPress?.Invoke();
         }
     }
+
+    public void InvokePausePress()
+    {
+        OnPausePress?.Invoke();
+    }
+
+    public void InvokePassTurnPress()
+    {
+        OnPassTurnPress?.Invoke();
+    }
 }

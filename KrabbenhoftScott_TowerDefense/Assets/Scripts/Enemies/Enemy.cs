@@ -11,7 +11,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected float _moveSpeed = 5f;
     [SerializeField] protected int _contactDamage = 10;
 
-    Health _health;
+    protected Health _health;
 
     protected virtual void Awake()
     {

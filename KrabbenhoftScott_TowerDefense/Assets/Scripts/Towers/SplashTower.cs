@@ -4,8 +4,32 @@ using UnityEngine;
 
 public class SplashTower : Tower
 {
+    [SerializeField] Transform _projectileOrigin;
+    [SerializeField] Projectile _projectilePrefab;
+    [SerializeField] int _explosiveDamage = 5;
+
+    public int ExplosiveDamage
+    {
+        get => _explosiveDamage;
+        set => _explosiveDamage = value;
+    }
+    
     protected override void Fire()
     {
-        //
+        if (_target == null)
+        {
+            _target = FindTarget();
+        }
+        
+        if (_target != null)
+        {
+            Projectile projectile = Instantiate(_projectilePrefab, _projectileOrigin.position, _projectileOrigin.rotation);
+            projectile.InitializeProjectile(this, _target, false);
+        }
+
+        _target = FindTarget();
+        UpdateLookTarget();
+        
+        StartCoroutine(FireCooldown());
     }
 }

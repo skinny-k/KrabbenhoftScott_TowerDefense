@@ -4,15 +4,20 @@ using UnityEngine;
 
 public class SpecialTower : Tower
 {
+    [SerializeField] Transform _projectileOrigin;
+    [SerializeField] Projectile _projectilePrefab;
+    
     protected override void Fire()
     {
         if (_target == null)
         {
             _target = FindTarget();
         }
-        else
+        
+        if (_target != null)
         {
-            _target.DecreaseHealth((int)Mathf.Round(_damage * _damageModifier), true);
+            Projectile projectile = Instantiate(_projectilePrefab, _projectileOrigin.position, _projectileOrigin.rotation);
+            projectile.InitializeProjectile(this, _target, true);
         }
 
         _target = FindTarget();

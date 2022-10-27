@@ -10,6 +10,14 @@ public class Swarmer : Enemy
     [SerializeField] float _chompAngle = 75f;
     [SerializeField] float _chompSpeed = 15f;
     [SerializeField] float _chompInterval = 0.5f;
+
+    [Header("Spawn Randomization Settings")]
+    [SerializeField] float _chanceToSpawnWithPhysicalResistance = 0.15f;
+    [SerializeField] float _chanceToSpawnWithSpecialResistance = 0.15f;
+
+    [Header("Graphic Settings")]
+    [SerializeField] Material m_specialDefense;
+    [SerializeField] Material m_physicalDefense;
     
     Player _nearestPlayer;
     Rigidbody _rb;
@@ -29,6 +37,8 @@ public class Swarmer : Enemy
         _legSet2 = transform.GetChild(3);
         _nearestPlayer = FindNearestPlayer();
 
+        // RandomizeStats();
+
         base.Awake();
     }
     
@@ -36,6 +46,30 @@ public class Swarmer : Enemy
     {
         AnimateLegs();
         AnimateMouth();
+    }
+
+    void RandomizeStats()
+    {
+        float percent = Random.Range(0f, 1f);
+        if (percent <= _chanceToSpawnWithPhysicalResistance)
+        {
+            _health.PhysicalDefenseModifier = 0.5f;
+            SetMaterial(m_physicalDefense);
+        }
+        else if (percent <= _chanceToSpawnWithPhysicalResistance + _chanceToSpawnWithSpecialResistance)
+        {
+            _health.SpecialDefenseModifier = 0.5f;
+            SetMaterial(m_specialDefense);
+        }
+
+        float sizeModifier = Random.Range(0f, 0.75f);
+        transform.localScale *= (1 + sizeModifier);
+        _health.MaxHealth = (int)(_health.MaxHealth * (1 + sizeModifier));
+    }
+
+    void SetMaterial(Material material)
+    {
+        //
     }
     
     protected override void Move()

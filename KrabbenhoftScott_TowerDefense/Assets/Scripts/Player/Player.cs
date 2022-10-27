@@ -24,8 +24,7 @@ public class Player : MonoBehaviour
         PlayerTurnState.OnPlayerTurnBegin += BeginTurn;
         PlayerTurnState.OnPlayerTurnEnd += EndTurn;
 
-        TowerMenuState.OnTowerMenuOpen += EnableWrench;
-        TowerMenuState.OnTowerMenuClose += DisableWrench;
+        EnemyTurnState.OnEnemyTurnBegin += DisableWrench;
     }
     
     void Awake()
@@ -41,7 +40,7 @@ public class Player : MonoBehaviour
 
     void EndTurn()
     {
-        DisableWrench();
+        //
     }
     
     void EnableWrench()
@@ -74,7 +73,6 @@ public class Player : MonoBehaviour
         PlayerTurnState.OnPlayerTurnBegin -= BeginTurn;
         PlayerTurnState.OnPlayerTurnEnd -= EndTurn;
 
-        TowerMenuState.OnTowerMenuOpen -= EnableWrench;
-        TowerMenuState.OnTowerMenuClose -= DisableWrench;
+        EnemyTurnState.OnEnemyTurnBegin -= DisableWrench;
     }
 }

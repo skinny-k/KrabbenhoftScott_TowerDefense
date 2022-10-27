@@ -7,12 +7,12 @@ public class PlayerTurnState : TowerDefenseState
 {
     public static event Action OnPlayerTurnBegin;
     public static event Action OnPlayerTurnEnd;
-    
-    bool _active = false;
+    public static bool InPlayerTurn = false;
     
     public override void Enter()
     {
         Debug.Log("Entered PlayerTurnState");
+        InPlayerTurn = true;
         OnPlayerTurnBegin?.Invoke();
         SubscribeToInput();
     }
@@ -20,6 +20,7 @@ public class PlayerTurnState : TowerDefenseState
     public override void Exit()
     {
         Debug.Log("Exited PlayerTurnState");
+        InPlayerTurn = false;
         OnPlayerTurnEnd?.Invoke();
         UnsubscribeToInput();
     }

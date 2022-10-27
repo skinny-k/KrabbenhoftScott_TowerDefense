@@ -14,13 +14,13 @@ public abstract class Tower : MonoBehaviour
     [Header("Tower Settings")]
     [SerializeField] protected float _range = 10f;
     [SerializeField] protected float _fireRate = 0.5f;
+    [SerializeField] protected int _damage = 5;
 
     // public Ability[] abilities = new Ability[5];
 
     protected TowerPlot _myPlot;
     protected Enemy _target = null;
     protected Vector3 _lookTarget = new Vector3(0, 200000, 0);
-    protected int _damage = 5;
     protected float _damageModifier = 1f;
     protected float _turnTimer = 0f;
     protected bool _canFire = true;

@@ -18,7 +18,6 @@ public class PhysicalTower : Tower
         {
             Projectile projectile = Instantiate(_projectilePrefab, _projectileOrigin.position, _projectileOrigin.rotation);
             projectile.InitializeProjectile(this, _target, false);
-            // _target.DecreaseHealth((int)Mathf.Round(_damage * _damageModifier), false);
         }
 
         _target = FindTarget();

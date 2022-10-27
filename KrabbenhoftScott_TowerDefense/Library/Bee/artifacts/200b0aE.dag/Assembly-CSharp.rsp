@@ -354,6 +354,7 @@
 "Assets/Scripts/Enemies/EnemySpawner.cs"
 "Assets/Scripts/Enemies/LevelSpawner.cs"
 "Assets/Scripts/Enemies/Swarmer.cs"
+"Assets/Scripts/ExplosiveProjectile.cs"
 "Assets/Scripts/GameController.cs"
 "Assets/Scripts/Health.cs"
 "Assets/Scripts/InputController.cs"
@@ -379,6 +380,7 @@
 "Assets/Scripts/Towers/Tower.cs"
 "Assets/Scripts/Towers/TowerPlot.cs"
 "Assets/Scripts/UI/TowerMenuUI.cs"
+"Assets/Scripts/UIButtonManager.cs"
 -langversion:9.0
 
 /deterministic
