@@ -5,25 +5,22 @@ using UnityEngine;
 
 public class TowerMenuState : TowerDefenseState
 {
-    //static TowerPlot _currentPlot;
     bool _active = false;
     
     public static event Action OnTowerMenuOpen;
     public static event Action OnTowerMenuClose;
 
-    /*
-    public static TowerPlot CurrentPlot
+    public bool Active
     {
-        get => _currentPlot;
-        set => _currentPlot = value;
+        get => _active;
     }
-    */
     
     public override void Enter()
     {
         Debug.Log("Entered TowerMenuState");
-        TowerMenuUI.OpenMenu();
         OnTowerMenuOpen?.Invoke();
+        TowerMenuUI.UpdateMenuContent();
+        TowerMenuUI.OpenMenu();
         SubscribeToInput();
     }
 
@@ -46,6 +43,8 @@ public class TowerMenuState : TowerDefenseState
     void SubscribeToInput()
     {
         TowerPlot.OnTowerBuild += TowerBuilt;
+        TowerPlot.OnTowerUpgrade += TowerUpgraded;
+        TowerPlot.OnTowerDestroy += TowerDestroyed;
         
         // InputController.Instance.OnLMBPress += Method;
         // InputController.Instance.OnPassTurnPress += Method;
@@ -81,6 +80,16 @@ public class TowerMenuState : TowerDefenseState
     }
 
     void TowerBuilt(Tower tower)
+    {
+        ReturnToPlayer();
+    }
+
+    void TowerUpgraded(Tower tower)
+    {
+        ReturnToPlayer();
+    }
+
+    void TowerDestroyed()
     {
         ReturnToPlayer();
     }

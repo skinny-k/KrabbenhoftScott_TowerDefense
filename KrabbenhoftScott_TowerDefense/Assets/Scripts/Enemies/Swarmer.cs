@@ -15,6 +15,11 @@ public class Swarmer : Enemy
     [SerializeField] float _chanceToSpawnWithPhysicalResistance = 0.15f;
     [SerializeField] float _chanceToSpawnWithSpecialResistance = 0.15f;
 
+    [Header("Obstruction Settings")]
+    [SerializeField] Obstruction _obstructionPrefab;
+    [SerializeField] float _obstructionDuration = 10f;
+    [SerializeField] int _chanceToSpawnObstruction = 10;
+
     [Header("Graphic Settings")]
     [SerializeField] Material m_specialDefense;
     [SerializeField] Material m_physicalDefense;
@@ -31,21 +36,32 @@ public class Swarmer : Enemy
     
     protected override void Awake()
     {
+        base.Awake();
+        
         _rb = GetComponent<Rigidbody>();
         _upperJaw = transform.GetChild(0);
         _legSet1 = transform.GetChild(2);
         _legSet2 = transform.GetChild(3);
         _nearestPlayer = FindNearestPlayer();
 
-        // RandomizeStats();
-
-        base.Awake();
+        RandomizeStats();
     }
     
     void Update()
     {
         AnimateLegs();
         AnimateMouth();
+    }
+
+    protected override void FixedUpdate()
+    {
+        base.FixedUpdate();
+        
+        if (Time.time % 1 == 0 && Random.Range(0, 101) <= _chanceToSpawnObstruction && _isGrounded)
+        {
+            PlaceObstruction();
+            gameObject.SetActive(false);
+        }
     }
 
     void RandomizeStats()
@@ -69,7 +85,19 @@ public class Swarmer : Enemy
 
     void SetMaterial(Material material)
     {
-        //
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            Transform group = transform.GetChild(i);
+
+            for (int j = 0; j < group.childCount; j++)
+            {
+                MeshRenderer mesh = group.GetChild(j).GetComponent<MeshRenderer>();
+                if (mesh != null)
+                {
+                    mesh.material = material;
+                }
+            }
+        }
     }
     
     protected override void Move()
@@ -124,6 +152,15 @@ public class Swarmer : Enemy
         }
     }
 
+    void PlaceObstruction()
+    {
+        Vector3 spawnPosition = transform.position - new Vector3(0, 0.15f, 0);
+        Vector3 spawnRotation = new Vector3(0, Random.Range(0, 359.9f), 0);
+        
+        Obstruction obstruction = Instantiate(_obstructionPrefab, spawnPosition, Quaternion.Euler(spawnRotation));
+        obstruction.Initialize(_obstructionDuration);
+    }
+
     void AnimateLegs()
     {
         _legSet1.localPosition = new Vector3(0, _legHeight * Mathf.Sin(Time.time * _legSpeed), 0);
@@ -151,7 +188,7 @@ public class Swarmer : Enemy
         }
     }
 
-    void OnDisable()
+    protected override void OnDisable()
     {
         base.OnDisable();
         

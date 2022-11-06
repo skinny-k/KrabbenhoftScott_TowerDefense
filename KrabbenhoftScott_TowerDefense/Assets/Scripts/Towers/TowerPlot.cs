@@ -10,11 +10,15 @@ public class TowerPlot : MonoBehaviour
     Tower _currentTower = null;
 
     public static event Action<TowerPlot> OnPlotClick;
+
     public static event Action<Tower> OnTowerBuild;
+    public static event Action<Tower> OnTowerUpgrade;
+    public static event Action OnTowerDestroy;
 
     public Tower CurrentTower
     {
         get => _currentTower;
+        set => _currentTower = value;
     }
 
     public void BuildTower<T>() where T : Tower
@@ -35,6 +39,18 @@ public class TowerPlot : MonoBehaviour
         _currentTower.OnTowerClick += TowerClick;
 
         OnTowerBuild?.Invoke(_currentTower);
+    }
+
+    public void UpgradeTower()
+    {
+        _currentTower.UpgradeTower();
+        OnTowerUpgrade?.Invoke(_currentTower);
+    }
+
+    public void DestroyTower()
+    {
+        _currentTower.DestroyTower();
+        OnTowerDestroy?.Invoke();
     }
 
     public void ClearTower()

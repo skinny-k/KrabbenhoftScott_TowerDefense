@@ -10,7 +10,7 @@ public class SM_TowerDefense : StateMachineBase
         private set;
     }
     
-    private void Awake()
+    protected override void Awake()
     {
         if (Instance == null)
         {
@@ -25,22 +25,22 @@ public class SM_TowerDefense : StateMachineBase
         base.Awake();
     }
     
-    void OnEnable()
+    protected virtual void OnEnable()
     {
         InputController.Instance.OnQuitPress += QuitGame;
     }
     
-    void Start()
+    protected virtual void Start()
     {
         ChangeState<InitializationState>();
     }
 
-    void QuitGame()
+    protected virtual void QuitGame()
     {
         Application.Quit();
     }
 
-    void OnDisable()
+    protected virtual void OnDisable()
     {
         InputController.Instance.OnQuitPress -= QuitGame;
     }

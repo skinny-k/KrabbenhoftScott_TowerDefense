@@ -14,7 +14,7 @@ public abstract class StateMachineBase : MonoBehaviour
         private set;
     }
 
-    protected void Awake()
+    protected virtual void Awake()
     {
         InTransition = false;
     }
@@ -59,7 +59,7 @@ public abstract class StateMachineBase : MonoBehaviour
         InTransition = false;
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (_currentState != null && !InTransition)
         {

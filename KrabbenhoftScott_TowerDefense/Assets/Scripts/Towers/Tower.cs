@@ -6,6 +6,7 @@ using UnityEngine;
 public abstract class Tower : MonoBehaviour
 {
     protected abstract void Fire();
+    public abstract void UpgradeTower();
     
     [Header("Move Settings")]
     [SerializeField] protected Transform _turnBody;
@@ -15,6 +16,11 @@ public abstract class Tower : MonoBehaviour
     [SerializeField] protected float _range = 10f;
     [SerializeField] protected float _fireRate = 0.5f;
     [SerializeField] protected int _damage = 5;
+
+    [Header("Construction Settings")]
+    [SerializeField] protected int _level = 1;
+    [SerializeField] protected int _buildCost = 10;
+    [SerializeField] protected int _upgradeCost = 10;
 
     // public Ability[] abilities = new Ability[5];
 
@@ -51,6 +57,10 @@ public abstract class Tower : MonoBehaviour
         get => _damageModifier;
         set => _damageModifier = value;
     }
+    public int Level
+    {
+        get => _level;
+    }
     
     protected virtual void Awake()
     {
@@ -76,6 +86,12 @@ public abstract class Tower : MonoBehaviour
     void OnMouseDown()
     {
         OnTowerClick?.Invoke();
+    }
+    
+    public virtual void DestroyTower()
+    {
+        _myPlot.ClearTower();
+        Destroy(gameObject);
     }
 
     protected void UpdateLookTarget()
@@ -182,10 +198,5 @@ public abstract class Tower : MonoBehaviour
         yield return new WaitForSeconds(_fireRate);
 
         _canFire = true;
-    }
-
-    void OnDestroy()
-    {
-        _myPlot.ClearTower();
     }
 }

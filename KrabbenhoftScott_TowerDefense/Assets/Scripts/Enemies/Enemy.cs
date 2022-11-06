@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,33 +13,49 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected int _contactDamage = 10;
 
     protected Health _health;
+    protected bool _isGrounded = false;
+
+    public event Action<Vector3> OnEnemyDisable;
 
     protected virtual void Awake()
     {
         _health = GetComponent<Health>();
     }
     
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         Move();
     }
 
-    public virtual void OnCollisionEnter(Collision collision)
+    protected virtual void OnCollisionEnter(Collision collision)
     {
         Player player = collision.gameObject.GetComponent<Player>();
         if (player != null)
         {
             player.DecreaseHealth(_contactDamage, false);
         }
+        else if (collision.gameObject.tag == "Ground")
+        {
+            _isGrounded = true;
+        }
+    }
+
+    protected virtual void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            _isGrounded = false;
+        }
     }
     
-    public void DecreaseHealth(int damage, bool isSpecial)
+    public virtual void DecreaseHealth(int damage, bool isSpecial)
     {
         _health.DecreaseHealth(damage, isSpecial);
     }
 
-    public void OnDisable()
+    protected virtual void OnDisable()
     {
         EnemyTurnState.EnemiesInScene.Remove(this);
+        OnEnemyDisable?.Invoke(transform.position);
     }
 }

@@ -25,4 +25,10 @@ public class SpecialTower : Tower
         
         StartCoroutine(FireCooldown());
     }
+
+    public override void UpgradeTower()
+    {
+        _level++;
+        Debug.Log(_level);
+    }
 }

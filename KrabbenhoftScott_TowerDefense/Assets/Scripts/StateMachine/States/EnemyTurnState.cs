@@ -19,7 +19,7 @@ public class EnemyTurnState : TowerDefenseState
     public static event Action OnEnemyTurnBegin;
     public static event Action OnEnemyTurnEnd;
     
-    public void Awake()
+    protected override void Awake()
     {
         Turn = 0;
         base.Awake();
