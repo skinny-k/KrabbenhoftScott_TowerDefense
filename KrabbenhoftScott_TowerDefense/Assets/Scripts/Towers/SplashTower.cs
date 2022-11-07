@@ -36,6 +36,5 @@ public class SplashTower : Tower
     public override void UpgradeTower()
     {
         _level++;
-        Debug.Log(_level);
     }
 }

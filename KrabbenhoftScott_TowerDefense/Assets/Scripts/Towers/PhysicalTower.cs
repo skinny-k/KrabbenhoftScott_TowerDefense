@@ -29,6 +29,5 @@ public class PhysicalTower : Tower
     public override void UpgradeTower()
     {
         _level++;
-        Debug.Log(_level);
     }
 }

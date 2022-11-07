@@ -6,9 +6,11 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     [SerializeField] GameObject _wrench;
+    [SerializeField] PlayerWallet _sharedResources;
     
     Health _health;
     PlayerMovement _movement;
+    static PlayerWallet Resources;
 
     public Health MyHealth
     {
@@ -17,6 +19,10 @@ public class Player : MonoBehaviour
     public PlayerMovement MyMovement
     {
         get => _movement;
+    }
+    public PlayerWallet PlayerResources
+    {
+        get => Resources;
     }
 
     void OnEnable()
@@ -31,6 +37,8 @@ public class Player : MonoBehaviour
     {
         _health = GetComponent<Health>();
         _movement = GetComponent<PlayerMovement>();
+
+        Resources = _sharedResources;
     }
 
     void BeginTurn()
@@ -51,6 +59,16 @@ public class Player : MonoBehaviour
     void DisableWrench()
     {
         _wrench.SetActive(false);
+    }
+
+    public static void DepositFunds(int deposit)
+    {
+        Resources.Deposit(deposit);
+    }
+
+    public static void WithdrawFunds(int withdrawal)
+    {
+        Resources.Withdraw(withdrawal);
     }
 
     public void ModifySpeed(float moveModifier, float duration)

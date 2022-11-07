@@ -35,6 +35,7 @@ public class TowerPlot : MonoBehaviour
         }
 
         _currentTower = Instantiate(towerToSpawn, transform);
+        Player.WithdrawFunds(_currentTower.BuildCost);
         _currentTower.MyPlot = this;
         _currentTower.OnTowerClick += TowerClick;
 
@@ -43,12 +44,14 @@ public class TowerPlot : MonoBehaviour
 
     public void UpgradeTower()
     {
+        Player.WithdrawFunds(_currentTower.UpgradeCost);
         _currentTower.UpgradeTower();
         OnTowerUpgrade?.Invoke(_currentTower);
     }
 
     public void DestroyTower()
     {
+        Player.DepositFunds(_currentTower.BuildCost);
         _currentTower.DestroyTower();
         OnTowerDestroy?.Invoke();
     }

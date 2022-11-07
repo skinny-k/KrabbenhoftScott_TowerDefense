@@ -364,6 +364,7 @@
 "Assets/Scripts/Obstruction.cs"
 "Assets/Scripts/Player/Player.cs"
 "Assets/Scripts/Player/PlayerMovement.cs"
+"Assets/Scripts/Player/PlayerWallet.cs"
 "Assets/Scripts/Projectiles/ExplosiveProjectile.cs"
 "Assets/Scripts/Projectiles/Projectile.cs"
 "Assets/Scripts/StateMachine/Bases/IState.cs"
