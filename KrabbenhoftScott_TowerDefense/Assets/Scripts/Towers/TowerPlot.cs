@@ -34,19 +34,25 @@ public class TowerPlot : MonoBehaviour
             }
         }
 
-        _currentTower = Instantiate(towerToSpawn, transform);
-        Player.WithdrawFunds(_currentTower.BuildCost);
-        _currentTower.MyPlot = this;
-        _currentTower.OnTowerClick += TowerClick;
+        if (Player.PlayerResources.Balance >= towerToSpawn.BuildCost)
+        {
+            _currentTower = Instantiate(towerToSpawn, transform);
+            Player.WithdrawFunds(_currentTower.BuildCost);
+            _currentTower.MyPlot = this;
+            _currentTower.OnTowerClick += TowerClick;
 
-        OnTowerBuild?.Invoke(_currentTower);
+            OnTowerBuild?.Invoke(_currentTower);
+        }
     }
 
     public void UpgradeTower()
     {
-        Player.WithdrawFunds(_currentTower.UpgradeCost);
-        _currentTower.UpgradeTower();
-        OnTowerUpgrade?.Invoke(_currentTower);
+        if (Player.PlayerResources.Balance >= _currentTower.UpgradeCost)
+        {
+            Player.WithdrawFunds(_currentTower.UpgradeCost);
+            _currentTower.UpgradeTower();
+            OnTowerUpgrade?.Invoke(_currentTower);
+        }
     }
 
     public void DestroyTower()

@@ -11,6 +11,7 @@ public abstract class Enemy : MonoBehaviour
     [Header("Enemy Settings")]
     [SerializeField] protected float _moveSpeed = 5f;
     [SerializeField] protected int _contactDamage = 10;
+    [SerializeField] protected int _rewardAmount = 5;
 
     protected Health _health;
     protected bool _isGrounded = false;
@@ -20,6 +21,8 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void Awake()
     {
         _health = GetComponent<Health>();
+
+        _health.OnDie += OnDie;
     }
     
     protected virtual void FixedUpdate()
@@ -51,6 +54,11 @@ public abstract class Enemy : MonoBehaviour
     public virtual void DecreaseHealth(int damage, bool isSpecial)
     {
         _health.DecreaseHealth(damage, isSpecial);
+    }
+
+    protected virtual void OnDie()
+    {
+        Player.DepositFunds(_rewardAmount);
     }
 
     protected virtual void OnDisable()

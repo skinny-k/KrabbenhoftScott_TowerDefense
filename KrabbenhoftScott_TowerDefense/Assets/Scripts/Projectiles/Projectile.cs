@@ -50,14 +50,14 @@ public class Projectile : MonoBehaviour
 
     protected virtual void Impact(Collision collision)
     {
+        _targetEnemy.OnEnemyDisable -= AdjustForTargetDeath;
+        
         Enemy enemyHit = collision.gameObject.GetComponent<Enemy>();
         
         if (enemyHit != null)
         {
             enemyHit.DecreaseHealth((int)Mathf.Round(_origin.Damage * _origin.DamageModifier), false);
         }
-        
-        _targetEnemy.OnEnemyDisable -= AdjustForTargetDeath;
         
         Feedback();
         Destroy(this.gameObject);

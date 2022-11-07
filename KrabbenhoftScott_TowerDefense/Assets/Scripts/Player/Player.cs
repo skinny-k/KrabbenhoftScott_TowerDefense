@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
     {
         get => _movement;
     }
-    public PlayerWallet PlayerResources
+    public static PlayerWallet PlayerResources
     {
         get => Resources;
     }

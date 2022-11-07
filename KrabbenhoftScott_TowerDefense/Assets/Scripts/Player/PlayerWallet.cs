@@ -6,7 +6,12 @@ public class PlayerWallet : MonoBehaviour
 {
     [SerializeField] int _startingBalance = 100;
     
-    int _balance = 0;
+    int _balance;
+
+    public int Balance
+    {
+        get => _balance;
+    }
     
     void Awake()
     {

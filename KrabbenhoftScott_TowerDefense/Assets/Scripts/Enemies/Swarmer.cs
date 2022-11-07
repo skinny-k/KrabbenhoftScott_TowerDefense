@@ -79,8 +79,10 @@ public class Swarmer : Enemy
         }
 
         float sizeModifier = Random.Range(0f, 0.75f);
+
         transform.localScale *= (1 + sizeModifier);
         _health.MaxHealth = (int)(_health.MaxHealth * (1 + sizeModifier));
+        _rewardAmount = (int)(_rewardAmount * (1 + sizeModifier));
     }
 
     void SetMaterial(Material material)
