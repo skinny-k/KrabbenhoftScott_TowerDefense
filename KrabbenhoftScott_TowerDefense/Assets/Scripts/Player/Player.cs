@@ -31,6 +31,8 @@ public class Player : MonoBehaviour
         PlayerTurnState.OnPlayerTurnEnd += EndTurn;
 
         EnemyTurnState.OnEnemyTurnBegin += DisableWrench;
+
+        EnemyTurnState.PlayersInScene.Add(this);
     }
     
     void Awake()
@@ -92,5 +94,7 @@ public class Player : MonoBehaviour
         PlayerTurnState.OnPlayerTurnEnd -= EndTurn;
 
         EnemyTurnState.OnEnemyTurnBegin -= DisableWrench;
+
+        EnemyTurnState.PlayersInScene.Remove(this);
     }
 }

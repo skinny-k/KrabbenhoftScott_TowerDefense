@@ -10,7 +10,6 @@ public class TowerMenuUI : MonoBehaviour
     [SerializeField] RectTransform BuildMenu;
     [SerializeField] RectTransform UpgradeMenu;
 
-    static TowerMenuState _menuState;
     static bool _active = false;
     
     public static TowerMenuUI Instance;
@@ -20,22 +19,32 @@ public class TowerMenuUI : MonoBehaviour
     
     void OnEnable()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+            // DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+        
         TowerPlot.OnPlotClick += SetCurrentTowerPlot;
     }
     
+    /*
     void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            _menuState = Instance.GameController.GetComponent<TowerMenuState>();
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
     }
+    */
 
     void Update()
     {
@@ -134,5 +143,13 @@ public class TowerMenuUI : MonoBehaviour
     void OnDisable()
     {
         TowerPlot.OnPlotClick += SetCurrentTowerPlot;
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
     }
 }

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +6,10 @@ using UnityEngine;
 public class PlayerWallet : MonoBehaviour
 {
     [SerializeField] int _startingBalance = 100;
+
+    public static event Action<int> OnBalanceUpdate;
     
-    int _balance;
+    int _balance = 0;
 
     public int Balance
     {
@@ -15,18 +18,18 @@ public class PlayerWallet : MonoBehaviour
     
     void Awake()
     {
-        _balance = _startingBalance;
+        Deposit(_startingBalance);
     }
     
     public void Deposit(int deposit)
     {
         _balance += deposit;
-        Debug.Log("Remaining resources: " + _balance);
+        OnBalanceUpdate?.Invoke(_balance);
     }
 
     public void Withdraw(int withdrawal)
     {
         _balance -= withdrawal;
-        Debug.Log("Remaining resources: " + _balance);
+        OnBalanceUpdate?.Invoke(_balance);
     }
 }

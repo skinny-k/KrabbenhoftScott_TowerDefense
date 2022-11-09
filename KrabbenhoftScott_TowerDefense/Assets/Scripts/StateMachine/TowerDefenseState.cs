@@ -11,7 +11,7 @@ public abstract class TowerDefenseState : MonoBehaviour, IState
         private set;
     }
 
-    protected virtual void Awake()
+    public virtual void Awake()
     {
         StateMachine = GetComponent<SM_TowerDefense>();
     }

@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PauseState : TowerDefenseState
 {
@@ -50,5 +51,20 @@ public class PauseState : TowerDefenseState
     void Unpause()
     {
         StateMachine.RevertState();
+    }
+
+    void RestartGame()
+    {
+        SceneManager.LoadScene("Battlefield");
+    }
+
+    void ReturnToMenu()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+    
+    void QuitGame()
+    {
+        Application.Quit();
     }
 }

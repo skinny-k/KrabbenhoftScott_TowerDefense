@@ -156,10 +156,9 @@ public class Swarmer : Enemy
 
     void PlaceObstruction()
     {
-        Vector3 spawnPosition = transform.position - new Vector3(0, 0.15f, 0);
         Vector3 spawnRotation = new Vector3(0, Random.Range(0, 359.9f), 0);
         
-        Obstruction obstruction = Instantiate(_obstructionPrefab, spawnPosition, Quaternion.Euler(spawnRotation));
+        Obstruction obstruction = Instantiate(_obstructionPrefab, transform.position, Quaternion.Euler(spawnRotation));
         obstruction.Initialize(_obstructionDuration);
     }
 

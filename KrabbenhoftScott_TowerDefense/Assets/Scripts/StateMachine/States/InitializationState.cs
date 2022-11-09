@@ -5,21 +5,29 @@ using UnityEngine.SceneManagement;
 
 public class InitializationState : TowerDefenseState
 {
-    static bool gameBegun = false;
+    bool _gameBegan = false;
+    bool _sceneChanging = false;
     
     public override void Enter()
     {
         Debug.Log("Entered InitializationState");
-        if (gameBegun)
+
+        if (_gameBegan)
         {
+            Debug.Log("Reloading scene...");
+            _sceneChanging = true;
+            EnemyTurnState.Turn = 0;
             SceneManager.LoadScene("Battlefield");
         }
-        gameBegun = true;
+        _gameBegan = true;
     }
 
     public override void Tick()
     {
-        StateMachine.ChangeState<PlayerTurnState>();
+        if (!_sceneChanging)
+        {
+            StateMachine.ChangeState<PlayerTurnState>();
+        }
     }
 
     public override void Exit()

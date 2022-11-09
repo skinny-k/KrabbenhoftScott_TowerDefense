@@ -383,8 +383,12 @@
 "Assets/Scripts/Towers/SplashTower.cs"
 "Assets/Scripts/Towers/Tower.cs"
 "Assets/Scripts/Towers/TowerPlot.cs"
+"Assets/Scripts/UI/EndgameMenuUI.cs"
+"Assets/Scripts/UI/HealthBar.cs"
+"Assets/Scripts/UI/MainMenuManager.cs"
+"Assets/Scripts/UI/PlayerHUD.cs"
 "Assets/Scripts/UI/TowerMenuUI.cs"
-"Assets/Scripts/UIButtonManager.cs"
+"Assets/Scripts/UI/UIButtonManager.cs"
 -langversion:9.0
 
 /deterministic

@@ -24,6 +24,10 @@ public class WinState : TowerDefenseState
 
     void SubscribeToInput()
     {
+        InputController.Instance.OnGameContinue += ReturnToGame;
+        InputController.Instance.OnGameRestart += RestartGame;
+        InputController.Instance.OnGameQuit += QuitGame;
+        
         // InputController.Instance.OnLMBPress += Method;
         // InputController.Instance.OnPassTurnPress += Method;
         // InputController.Instance.OnInteractPress += Method;
@@ -34,11 +38,33 @@ public class WinState : TowerDefenseState
 
     void UnsubscribeToInput()
     {
+        InputController.Instance.OnGameContinue -= ReturnToGame;
+        InputController.Instance.OnGameRestart -= RestartGame;
+        InputController.Instance.OnGameQuit -= QuitGame;
+        
         // InputController.Instance.OnLMBPress -= Method;
         // InputController.Instance.OnPassTurnPress -= Method;
         // InputController.Instance.OnInteractPress -= Method;
         // InputController.Instance.OnPausePress -= Method;
         // InputController.Instance.OnMutePress -= Method;
         // InputController.Instance.OnAnyKeyPress -= Method;
+    }
+
+    void ReturnToGame()
+    {
+        Debug.Log("Continuing game...");
+        StateMachine.ChangeState<PlayerTurnState>();
+    }
+
+    void RestartGame()
+    {
+        Debug.Log("Restarting game...");
+        StateMachine.ChangeState<InitializationState>();
+    }
+    
+    void QuitGame()
+    {
+        Debug.Log("Quitting game...");
+        Application.Quit();
     }
 }

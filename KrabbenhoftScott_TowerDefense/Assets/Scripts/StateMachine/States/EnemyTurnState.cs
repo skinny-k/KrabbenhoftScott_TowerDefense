@@ -6,20 +6,16 @@ using UnityEngine;
 public class EnemyTurnState : TowerDefenseState
 {
     public static ArrayList EnemiesInScene = new ArrayList();
-    public static bool _gameContinued;
-
-    float _timeThisTurn;
+    public static ArrayList PlayersInScene = new ArrayList();
     
-    public static int Turn
-    {
-        get;
-        private set;
-    }
+    public static int Turn;
 
     public static event Action OnEnemyTurnBegin;
     public static event Action OnEnemyTurnEnd;
+
+    float _timeThisTurn;
     
-    protected override void Awake()
+    public override void Awake()
     {
         Turn = 0;
         base.Awake();
@@ -38,17 +34,14 @@ public class EnemyTurnState : TowerDefenseState
     {
         _timeThisTurn += Time.deltaTime;
 
-        if (FindObjectsOfType(typeof(Player)).Length == 0)
+        if (PlayersInScene.Count == 0 && _timeThisTurn >= 2f)
         {
             StateMachine.ChangeState<LoseState>();
         }
         
-        if (EnemiesInScene.Count == 0)
+        if (EnemiesInScene.Count == 0 && _timeThisTurn >= 2f)
         {
-            if (FindObjectsOfType(typeof(Enemy)).Length == 0)
-            {
-                StartCoroutine(PassTurn());
-            }
+            StartCoroutine(PassTurn());
         }
     }
 
@@ -83,13 +76,13 @@ public class EnemyTurnState : TowerDefenseState
     {
         yield return new WaitForSeconds(1f);
 
-        if (Turn < 5 || _gameContinued)
-        {
-            StateMachine.ChangeState<PlayerTurnState>();
-        }
-        else if (Turn >= 5)
+        if (Turn == 5)
         {
             StateMachine.ChangeState<WinState>();
+        }
+        else if (Turn != 5)
+        {
+            StateMachine.ChangeState<PlayerTurnState>();
         }
     }
     void Pause()

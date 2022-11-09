@@ -5,11 +5,7 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    public static InputController Instance
-    {
-        get;
-        private set;
-    }
+    public static InputController Instance;
 
     [SerializeField] KeyCode _passTurnKey = KeyCode.Q;
     [SerializeField] KeyCode _interactKey = KeyCode.Space;
@@ -26,12 +22,16 @@ public class InputController : MonoBehaviour
     public event Action OnMutePress;
     public event Action OnAnyKeyPress;
 
-    private void Awake()
+    public event Action OnGameContinue;
+    public event Action OnGameRestart;
+    public event Action OnGameQuit;
+
+    void OnEnable()
     {
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            // DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -121,5 +121,28 @@ public class InputController : MonoBehaviour
     public void InvokePassTurnPress()
     {
         OnPassTurnPress?.Invoke();
+    }
+
+    public void InvokeGameContinue()
+    {
+        OnGameContinue?.Invoke();
+    }
+    
+    public void InvokeGameRestart()
+    {
+        OnGameRestart?.Invoke();
+    }
+
+    public void InvokeGameQuit()
+    {
+        OnGameQuit?.Invoke();
+    }
+
+    void OnDestroy()
+    {
+        if (Instance == this)
+        {
+            Instance = null;
+        }
     }
 }
