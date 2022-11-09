@@ -4,18 +4,12 @@ using UnityEngine;
 
 public class ExplosiveProjectile : Projectile
 {
-    [SerializeField] float _radius = 2f;
-
-    SplashTower _splashOrigin;
-
-    protected override void OnCollisionEnter(Collision collision)
+    SplashTower _originAsSplashTower;
+    
+    public override void InitializeProjectile(Tower origin, Enemy target, bool isSpecial)
     {
-        Impact(collision);
-    }
-
-    public void InitializeProjectile(SplashTower origin, Enemy target, bool isSpecial)
-    {
-        _splashOrigin = origin;
+        _origin = origin;
+        _originAsSplashTower = _origin.GetComponent<SplashTower>();
         _targetEnemy = target;
         _isSpecial = isSpecial;
 
@@ -24,37 +18,29 @@ public class ExplosiveProjectile : Projectile
 
     protected override void Impact(Collision collision)
     {
-        Enemy enemyHit = collision.gameObject.GetComponent<Enemy>();
-        
-        if (enemyHit != null)
-        {
-            enemyHit.DecreaseHealth((int)Mathf.Round(_splashOrigin.Damage * _splashOrigin.DamageModifier), false);
-        }
-
         Explode();
-        
-        Feedback();
-        Destroy(this.gameObject);
+
+        base.Impact(collision);
     }
 
-    void Explode()
+    protected virtual void Explode()
     {
-        RaycastHit[] hits = Physics.SphereCastAll(transform.position, _radius, transform.forward, Mathf.Infinity, LayerMask.NameToLayer("Enemies"));
-        Enemy[] enemies = new Enemy[hits.Length];
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, _originAsSplashTower.ExplosiveRadius, Vector3.forward);
+        
+        ArrayList enemies = new ArrayList();
 
-        for (int i = 0; i < hits.Length; i++)
+        foreach (RaycastHit hit in hits)
         {
-            enemies[i] = hits[i].collider.gameObject.GetComponent<Enemy>();
+            Enemy enemy = hit.collider.gameObject.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemies.Add(enemy);
+            }
         }
 
         foreach (Enemy enemy in enemies)
         {
-            enemy.DecreaseHealth((int)Mathf.Round(_splashOrigin.ExplosiveDamage * _splashOrigin.DamageModifier), false);
+            enemy.DecreaseHealth(_originAsSplashTower.ExplosiveDamage, false);
         }
-    }
-
-    protected override void Feedback()
-    {
-        //
     }
 }

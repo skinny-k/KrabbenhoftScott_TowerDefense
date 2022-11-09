@@ -6,8 +6,14 @@ public class SplashTower : Tower
 {
     [SerializeField] Transform _projectileOrigin;
     [SerializeField] Projectile _projectilePrefab;
+    [SerializeField] float _explosiveRadius = 2.5f;
     [SerializeField] int _explosiveDamage = 5;
 
+    public float ExplosiveRadius
+    {
+        get => _explosiveRadius;
+        set => _explosiveRadius = value;
+    }
     public int ExplosiveDamage
     {
         get => _explosiveDamage;

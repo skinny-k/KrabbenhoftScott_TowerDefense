@@ -461,9 +461,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _turnBody: {fileID: 2935548720686668511}
   _turnSpeed: 10
-  _range: 10
-  _fireRate: 0.5
-  _damage: 5
+  _range: 20
+  _fireRate: 1.75
+  _damage: 10
+  _level: 1
+  _buildCost: 10
+  _upgradeCost: 10
   _projectileOrigin: {fileID: 2935548721628138784}
-  _projectilePrefab: {fileID: 1539010967643832022, guid: 1f49e4a86063d43bb9a0aa704ea4f1c3, type: 3}
+  _projectilePrefab: {fileID: 8639958332561407682, guid: 1f49e4a86063d43bb9a0aa704ea4f1c3, type: 3}
+  _explosiveRadius: 2.5
   _explosiveDamage: 5

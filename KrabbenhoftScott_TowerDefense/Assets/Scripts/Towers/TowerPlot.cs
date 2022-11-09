@@ -6,6 +6,10 @@ using UnityEngine;
 public class TowerPlot : MonoBehaviour
 {
     [SerializeField] Tower[] _towerPrefabs;
+
+    [Header("Feedback Settings")]
+    [SerializeField] AudioClip _buildSFX;
+    [SerializeField] float _volume = 1f;
     
     Tower _currentTower = null;
 
@@ -41,6 +45,8 @@ public class TowerPlot : MonoBehaviour
             _currentTower.MyPlot = this;
             _currentTower.OnTowerClick += TowerClick;
 
+            Feedback(_buildSFX, false);
+
             OnTowerBuild?.Invoke(_currentTower);
         }
     }
@@ -51,6 +57,9 @@ public class TowerPlot : MonoBehaviour
         {
             Player.WithdrawFunds(_currentTower.UpgradeCost);
             _currentTower.UpgradeTower();
+
+            Feedback(_buildSFX, false);
+
             OnTowerUpgrade?.Invoke(_currentTower);
         }
     }
@@ -76,5 +85,25 @@ public class TowerPlot : MonoBehaviour
     void TowerClick()
     {
         OnPlotClick?.Invoke(this);
+    }
+
+    void Feedback(AudioClip sfx = null, bool playAs3D = false, ParticleSystem particles = null)
+    {
+        if (sfx != null)
+        {
+            if (playAs3D)
+            {
+                AudioHelper.PlayClip3D(sfx, _volume, transform.position);
+            }
+            else
+            {
+                AudioHelper.PlayClip2D(sfx, _volume);
+            }
+        }
+
+        if (particles != null)
+        {
+            Instantiate(particles, transform.position, Quaternion.identity);
+        }
     }
 }

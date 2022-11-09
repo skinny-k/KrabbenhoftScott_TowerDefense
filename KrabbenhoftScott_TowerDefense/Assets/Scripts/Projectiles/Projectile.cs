@@ -11,7 +11,7 @@ public class Projectile : MonoBehaviour
     protected Vector3 _targetPosition;
     protected bool _isSpecial = false;
     
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
         Vector3 target;
         
@@ -50,7 +50,10 @@ public class Projectile : MonoBehaviour
 
     protected virtual void Impact(Collision collision)
     {
-        _targetEnemy.OnEnemyDisable -= AdjustForTargetDeath;
+        if (_targetEnemy != null)
+        {
+            _targetEnemy.OnEnemyDisable -= AdjustForTargetDeath;
+        }
         
         Enemy enemyHit = collision.gameObject.GetComponent<Enemy>();
         
