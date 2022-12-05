@@ -27,10 +27,9 @@ public class Projectile : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, target, _travelSpeed * Time.deltaTime);
         transform.LookAt(target);
 
-        if (_targetEnemy == null && transform.position == _targetPosition)
+        if (transform.position == target)
         {
-            Feedback();
-            Destroy(this.gameObject);
+            Impact(null);
         }
     }
 
@@ -55,7 +54,11 @@ public class Projectile : MonoBehaviour
             _targetEnemy.OnEnemyDisable -= AdjustForTargetDeath;
         }
         
-        Enemy enemyHit = collision.gameObject.GetComponent<Enemy>();
+        Enemy enemyHit = null;
+        if (collision != null)
+        {
+            enemyHit = collision.gameObject.GetComponent<Enemy>();
+        }
         
         if (enemyHit != null)
         {

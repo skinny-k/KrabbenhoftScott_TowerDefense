@@ -13,6 +13,7 @@ public abstract class Enemy : MonoBehaviour
     [SerializeField] protected int _contactDamage = 10;
     [SerializeField] protected int _rewardAmount = 5;
 
+    protected EnemyPool _enemyPool;
     protected Health _health;
     protected bool _isGrounded = false;
 
@@ -23,6 +24,12 @@ public abstract class Enemy : MonoBehaviour
         _health = GetComponent<Health>();
 
         _health.OnDie += OnDie;
+    }
+
+    public virtual void Initialize(EnemyPool pool)
+    {
+        _enemyPool = pool;
+        _health.Awake();
     }
     
     protected virtual void FixedUpdate()
@@ -59,11 +66,8 @@ public abstract class Enemy : MonoBehaviour
     protected virtual void OnDie()
     {
         Player.DepositFunds(_rewardAmount);
-    }
-
-    protected virtual void OnDisable()
-    {
-        EnemyTurnState.EnemiesInScene.Remove(this);
         OnEnemyDisable?.Invoke(transform.position);
+
+        _enemyPool.ReturnToPool(this);
     }
 }

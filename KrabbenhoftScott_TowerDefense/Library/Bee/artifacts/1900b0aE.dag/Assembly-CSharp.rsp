@@ -363,6 +363,8 @@
 "Assets/Scripts/InputController.cs"
 "Assets/Scripts/Interfaces/IDamageable.cs"
 "Assets/Scripts/Interfaces/IHealable.cs"
+"Assets/Scripts/Object Pooling/EnemyPool.cs"
+"Assets/Scripts/Object Pooling/ObjectPool.cs"
 "Assets/Scripts/Obstruction.cs"
 "Assets/Scripts/Player/Player.cs"
 "Assets/Scripts/Player/PlayerMovement.cs"

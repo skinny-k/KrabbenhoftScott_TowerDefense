@@ -47,7 +47,11 @@ public class Swarmer : Enemy
         _legSet1 = transform.GetChild(2);
         _legSet2 = transform.GetChild(3);
         _nearestPlayer = FindNearestPlayer();
+    }
 
+    public override void Initialize(EnemyPool pool)
+    {
+        base.Initialize(pool);
         RandomizeStats();
     }
     
@@ -71,7 +75,7 @@ public class Swarmer : Enemy
         if (Time.time % 1 == 0 && Random.Range(0, 101) <= _chanceToSpawnObstruction && _isGrounded)
         {
             PlaceObstruction();
-            gameObject.SetActive(false);
+            _enemyPool.ReturnToPool(this);
         }
     }
 
@@ -197,12 +201,5 @@ public class Swarmer : Enemy
                 _chomp = false;
             }
         }
-    }
-
-    protected override void OnDisable()
-    {
-        base.OnDisable();
-        
-        Destroy(this.gameObject);
     }
 }

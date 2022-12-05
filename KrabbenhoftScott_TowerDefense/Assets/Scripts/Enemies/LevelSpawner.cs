@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class LevelSpawner : MonoBehaviour
 {
-    [SerializeField] Enemy[] _enemyPrefabs;
+    [SerializeField] EnemyPool[] _enemyPools;
     [SerializeField] float _spawnBuffer = 0.2f;
 
     EnemySpawner[] _enemySpawners;
@@ -23,19 +23,19 @@ public class LevelSpawner : MonoBehaviour
     {
         Debug.Log("Spawn enemies for turn " + EnemyTurnState.Turn);
 
-        foreach (Enemy enemyType in _enemyPrefabs)
+        foreach (EnemyPool pool in _enemyPools)
         {
-            StartCoroutine(SpawnEnemies(enemyType, enemyType.GetSpawnCountOfTurn(EnemyTurnState.Turn)));
+            StartCoroutine(SpawnEnemies(pool, pool.Prefab.GetSpawnCountOfTurn(EnemyTurnState.Turn)));
         }
     }
 
-    IEnumerator SpawnEnemies(Enemy enemyPrefab, int count)
+    IEnumerator SpawnEnemies(EnemyPool enemyPool, int count)
     {
         for (int i = 0; i < count; i++)
         {
             EnemySpawner spawner = ChooseSpawner();
 
-            spawner.SpawnEnemy(enemyPrefab);
+            spawner.SpawnEnemy(enemyPool);
 
             yield return new WaitForSeconds(_spawnBuffer);
         }
