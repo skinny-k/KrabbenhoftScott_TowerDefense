@@ -8,8 +8,15 @@ public class TowerPlot : MonoBehaviour
     [SerializeField] Tower[] _towerPrefabs;
 
     [Header("Feedback Settings")]
+    [SerializeField] ParticleSystem _buildParticles;
     [SerializeField] AudioClip _buildSFX;
+    [SerializeField] ParticleSystem _destroyParticles;
+    [SerializeField] AudioClip _destroySFX;
     [SerializeField] float _volume = 1f;
+
+    [Header("Indicator Settings")]
+    [SerializeField] WorldspaceIcon _buildIndicator;
+    [SerializeField] float _towerHeight = 4f;
     
     Tower _currentTower = null;
 
@@ -23,6 +30,12 @@ public class TowerPlot : MonoBehaviour
     {
         get => _currentTower;
         set => _currentTower = value;
+    }
+
+    void OnEnable()
+    {
+        PlayerTurnState.OnPlayerTurnBegin += DisplayBuildIndicator;
+        PlayerTurnState.OnPlayerTurnEnd += HideBuildIndicator;
     }
 
     public void BuildTower<T>() where T : Tower
@@ -45,7 +58,12 @@ public class TowerPlot : MonoBehaviour
             _currentTower.MyPlot = this;
             _currentTower.OnTowerClick += TowerClick;
 
-            Feedback(_buildSFX, false);
+            if (_buildIndicator != null)
+            {
+                _buildIndicator.AdjustBasePosition(new Vector3(0, _towerHeight, 0));
+            }
+
+            Feedback(_buildSFX, false, _buildParticles);
 
             OnTowerBuild?.Invoke(_currentTower);
         }
@@ -58,7 +76,7 @@ public class TowerPlot : MonoBehaviour
             Player.WithdrawFunds(_currentTower.UpgradeCost);
             _currentTower.UpgradeTower();
 
-            Feedback(_buildSFX, false);
+            Feedback(_buildSFX, false, _buildParticles);
 
             OnTowerUpgrade?.Invoke(_currentTower);
         }
@@ -68,6 +86,10 @@ public class TowerPlot : MonoBehaviour
     {
         Player.DepositFunds(_currentTower.BuildCost);
         _currentTower.DestroyTower();
+        if (_buildIndicator != null)
+        {
+            _buildIndicator.AdjustBasePosition(new Vector3(0, -_towerHeight, 0));
+        }
         OnTowerDestroy?.Invoke();
     }
 
@@ -85,6 +107,16 @@ public class TowerPlot : MonoBehaviour
     void TowerClick()
     {
         OnPlotClick?.Invoke(this);
+    }
+
+    void DisplayBuildIndicator()
+    {
+        _buildIndicator.gameObject.SetActive(true);
+    }
+
+    void HideBuildIndicator()
+    {
+        _buildIndicator.gameObject.SetActive(false);
     }
 
     void Feedback(AudioClip sfx = null, bool playAs3D = false, ParticleSystem particles = null)
@@ -105,5 +137,11 @@ public class TowerPlot : MonoBehaviour
         {
             Instantiate(particles, transform.position, Quaternion.identity);
         }
+    }
+
+    void OnDisable()
+    {
+        PlayerTurnState.OnPlayerTurnBegin -= DisplayBuildIndicator;
+        PlayerTurnState.OnPlayerTurnEnd -= HideBuildIndicator;
     }
 }

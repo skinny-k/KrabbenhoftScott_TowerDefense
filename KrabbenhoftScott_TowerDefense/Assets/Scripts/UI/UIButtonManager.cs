@@ -3,22 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIButtonManager : MonoBehaviour
 {
+    [SerializeField] GameObject _pauseMenu;
     [SerializeField] Button _pauseButton;
     [SerializeField] Button _passTurnButton;
+    [SerializeField] string _mainMenuScene = "Main Menu";
+    [SerializeField] SM_TowerDefense StateMachine;
 
     void OnEnable()
     {
-        PauseState.OnPause += UpdatePauseButton;
-        PauseState.OnUnpause += UpdatePauseButton;
+        PauseState.OnPause += UpdatePauseMenus;
+        PauseState.OnUnpause += UpdatePauseMenus;
 
         PlayerTurnState.OnPlayerTurnBegin += UpdatePassTurnButton;
         PlayerTurnState.OnPlayerTurnEnd += UpdatePassTurnButton;
     }
 
+    void UpdatePauseMenus()
+    {
+        _pauseMenu.SetActive(PauseState.Paused);
+        UpdatePauseButton();
+    }
+    
     void UpdatePauseButton()
     {
         if (PauseState.Paused)
@@ -38,10 +48,25 @@ public class UIButtonManager : MonoBehaviour
 
     void OnDisable()
     {
-        PauseState.OnPause -= UpdatePauseButton;
-        PauseState.OnUnpause -= UpdatePauseButton;
+        PauseState.OnPause -= UpdatePauseMenus;
+        PauseState.OnUnpause -= UpdatePauseMenus;
 
         PlayerTurnState.OnPlayerTurnBegin -= UpdatePassTurnButton;
         PlayerTurnState.OnPlayerTurnEnd -= UpdatePassTurnButton;
+    }
+
+    public void ReturnToMainMenu()
+    {
+        SceneManager.LoadScene(_mainMenuScene);
+    }
+    
+    public void RestartGame()
+    {
+        StateMachine.ChangeState<InitializationState>();
+    }
+    
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

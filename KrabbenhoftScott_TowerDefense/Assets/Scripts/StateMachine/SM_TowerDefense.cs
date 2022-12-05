@@ -10,23 +10,6 @@ public class SM_TowerDefense : StateMachineBase
         private set;
     }
     
-    /*
-    protected override void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            // DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-        base.Awake();
-    }
-    */
-    
     protected virtual void OnEnable()
     {
         if (Instance == null)
@@ -39,7 +22,7 @@ public class SM_TowerDefense : StateMachineBase
             Destroy(gameObject);
         }
         
-        InputController.Instance.OnQuitPress += QuitGame;
+        InputController.OnQuitPress += QuitGame;
     }
     
     protected virtual void Start()
@@ -52,10 +35,13 @@ public class SM_TowerDefense : StateMachineBase
         Application.Quit();
     }
 
+    protected virtual void OnDisable()
+    {
+        InputController.OnQuitPress -= QuitGame;
+    }
+    
     protected virtual void OnDestroy()
     {
-        InputController.Instance.OnQuitPress -= QuitGame;
-
         if (Instance == this)
         {
             Instance = null;

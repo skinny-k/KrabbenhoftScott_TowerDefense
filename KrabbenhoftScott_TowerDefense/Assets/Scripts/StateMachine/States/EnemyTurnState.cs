@@ -57,7 +57,7 @@ public class EnemyTurnState : TowerDefenseState
         // InputController.Instance.OnLMBPress += Method;
         // InputController.Instance.OnPassTurnPress += Method;
         // InputController.Instance.OnInteractPress += Method;
-        InputController.Instance.OnPausePress += Pause;
+        InputController.OnPausePress += Pause;
         // InputController.Instance.OnMutePress += Method;
         // InputController.Instance.OnAnyKeyPress += Method;
     }
@@ -67,7 +67,7 @@ public class EnemyTurnState : TowerDefenseState
         // InputController.Instance.OnLMBPress -= Method;
         // InputController.Instance.OnPassTurnPress -= Method;
         // InputController.Instance.OnInteractPress -= Method;
-        InputController.Instance.OnPausePress -= Pause;
+        InputController.OnPausePress -= Pause;
         // InputController.Instance.OnMutePress -= Method;
         // InputController.Instance.OnAnyKeyPress -= Method;
     }

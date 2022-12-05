@@ -30,9 +30,9 @@ public class PlayerTurnState : TowerDefenseState
         TowerPlot.OnPlotClick += OpenTowerMenu;
         
         // InputController.Instance.OnLMBPress += Method;
-        InputController.Instance.OnPassTurnPress += PassTurn;
+        InputController.OnPassTurnPress += PassTurn;
         // InputController.Instance.OnInteractPress += Method;
-        InputController.Instance.OnPausePress += Pause;
+        InputController.OnPausePress += Pause;
         // InputController.Instance.OnMutePress += Method;
         // InputController.Instance.OnAnyKeyPress += Method;
     }
@@ -42,9 +42,9 @@ public class PlayerTurnState : TowerDefenseState
         TowerPlot.OnPlotClick -= OpenTowerMenu;
         
         // InputController.Instance.OnLMBPress -= Method;
-        InputController.Instance.OnPassTurnPress -= PassTurn;
+        InputController.OnPassTurnPress -= PassTurn;
         // InputController.Instance.OnInteractPress -= Method;
-        InputController.Instance.OnPausePress -= Pause;
+        InputController.OnPausePress -= Pause;
         // InputController.Instance.OnMutePress -= Method;
         // InputController.Instance.OnAnyKeyPress -= Method;
     }

@@ -14,17 +14,17 @@ public class InputController : MonoBehaviour
     [SerializeField] KeyCode _modifierKey = KeyCode.LeftShift;
     [SerializeField] KeyCode _altModifierKey = KeyCode.RightShift;
     
-    public event Action<Vector3> OnLMBPress;
-    public event Action OnQuitPress;
-    public event Action OnPassTurnPress;
-    public event Action OnInteractPress;
-    public event Action OnPausePress;
-    public event Action OnMutePress;
-    public event Action OnAnyKeyPress;
+    public static event Action<Vector3> OnLMBPress;
+    public static event Action OnQuitPress;
+    public static event Action OnPassTurnPress;
+    public static event Action OnInteractPress;
+    public static event Action OnPausePress;
+    public static event Action OnMutePress;
+    public static event Action OnAnyKeyPress;
 
-    public event Action OnGameContinue;
-    public event Action OnGameRestart;
-    public event Action OnGameQuit;
+    public static event Action OnGameContinue;
+    public static event Action OnGameRestart;
+    public static event Action OnGameQuit;
 
     void OnEnable()
     {

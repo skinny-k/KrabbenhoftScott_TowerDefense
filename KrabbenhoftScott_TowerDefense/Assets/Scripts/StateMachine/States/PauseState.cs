@@ -33,7 +33,7 @@ public class PauseState : TowerDefenseState
         // InputController.Instance.OnLMBPress += Method;
         // InputController.Instance.OnPassTurnPress += Method;
         // InputController.Instance.OnInteractPress += Method;
-        InputController.Instance.OnPausePress += Unpause;
+        InputController.OnPausePress += Unpause;
         // InputController.Instance.OnMutePress += Method;
         // InputController.Instance.OnAnyKeyPress += Method;
     }
@@ -43,7 +43,7 @@ public class PauseState : TowerDefenseState
         // InputController.Instance.OnLMBPress -= Method;
         // InputController.Instance.OnPassTurnPress -= Method;
         // InputController.Instance.OnInteractPress -= Method;
-        InputController.Instance.OnPausePress -= Unpause;
+        InputController.OnPausePress -= Unpause;
         // InputController.Instance.OnMutePress -= Method;
         // InputController.Instance.OnAnyKeyPress -= Method;
     }

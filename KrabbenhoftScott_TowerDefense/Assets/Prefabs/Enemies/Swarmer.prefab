@@ -87,6 +87,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _moveSpeed: 5
   _contactDamage: 10
+  _rewardAmount: 5
   _legHeight: 0.075
   _legSpeed: 25
   _chompAngle: 75
@@ -94,11 +95,15 @@ MonoBehaviour:
   _chompInterval: 0.2
   _chanceToSpawnWithPhysicalResistance: 0.15
   _chanceToSpawnWithSpecialResistance: 0.15
-  _obstructionPrefab: {fileID: -8252060728291659272, guid: b116e3dbd1dca4ee8b35908c52e5bdbf, type: 3}
-  _obstructionDuration: 10
+  _obstructionPrefab: {fileID: 1843392432159933915, guid: b116e3dbd1dca4ee8b35908c52e5bdbf, type: 3}
   _chanceToSpawnObstruction: 10
   m_specialDefense: {fileID: 2100000, guid: 54ad47b015a664224a3332ac4dc31d96, type: 2}
   m_physicalDefense: {fileID: 2100000, guid: e39ea5189252d4f00ae0864d2591b176, type: 2}
+  _chitterSFX:
+  - {fileID: 8300000, guid: 0f24ace88d18d45189f16f49b48d20d9, type: 3}
+  - {fileID: 8300000, guid: 365ee0d77d6034244bddbd25c36c0793, type: 3}
+  - {fileID: 8300000, guid: 3ad983c43669443808c71fc7349cf4e6, type: 3}
+  _volume: 1
 --- !u!114 &-2584605553715751447
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,10 +121,10 @@ MonoBehaviour:
   _iFrames: 0
   _physicalDefenseModifier: 0
   _specialDefenseModifier: 0
-  _damageParticles: {fileID: 0}
-  _damageSFX: {fileID: 0}
-  _dieParticles: {fileID: 0}
-  _dieSFX: {fileID: 0}
+  _damageParticles: {fileID: 940303205772784699, guid: d62dff5490041429b88d84831cbc4849, type: 3}
+  _damageSFX: {fileID: 8300000, guid: fad9416a0d3a74a0c8527c91b91f3e9c, type: 3}
+  _dieParticles: {fileID: 940303205772784699, guid: 5ebbb611ab8114311bfe97c92bf0601a, type: 3}
+  _dieSFX: {fileID: 8300000, guid: e4c65adf0b79c48018f9d75f5d5d9966, type: 3}
   _damageEmissionColor: {r: 0, g: 0, b: 0, a: 1}
   _SFXVolume: 1
 --- !u!54 &3211230580755283897

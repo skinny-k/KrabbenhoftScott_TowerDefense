@@ -16,6 +16,7 @@ public abstract class Tower : MonoBehaviour
     [SerializeField] protected float _range = 10f;
     [SerializeField] protected float _fireRate = 0.5f;
     [SerializeField] protected int _damage = 5;
+    protected float _damageModifier = 1f;
 
     public float Range
     {
@@ -39,10 +40,15 @@ public abstract class Tower : MonoBehaviour
     }
 
     [Header("Construction Settings")]
-    [SerializeField] protected int _level = 1;
+    [SerializeField] protected int _level = 0;
     [SerializeField] protected int _buildCost = 10;
     [SerializeField] protected int _upgradeCost = 10;
+    [SerializeField] protected GameObject[] _levelChevrons = new GameObject[3];
 
+    public int Level
+    {
+        get => _level;
+    }
     public int BuildCost
     {
         get => _buildCost;
@@ -53,23 +59,22 @@ public abstract class Tower : MonoBehaviour
         set => _upgradeCost = value;
     }
 
+    [Header("Feedback Settings")]
+    [SerializeField] protected AudioClip _fireSFX;
+    [SerializeField] protected float _volume = 1;
+
     protected TowerPlot _myPlot;
     protected Enemy _target = null;
     protected Vector3 _lookTarget = new Vector3(0, 200000, 0);
-    protected float _damageModifier = 1f;
     protected float _turnTimer = 0f;
     protected bool _canFire = true;
-
-    public event Action OnTowerClick;
 
     public TowerPlot MyPlot
     {
         set => _myPlot = value;
     }
-    public int Level
-    {
-        get => _level;
-    }
+
+    public event Action OnTowerClick;
     
     protected virtual void Awake()
     {

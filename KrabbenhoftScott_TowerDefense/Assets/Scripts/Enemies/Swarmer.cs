@@ -16,13 +16,16 @@ public class Swarmer : Enemy
     [SerializeField] float _chanceToSpawnWithSpecialResistance = 0.15f;
 
     [Header("Obstruction Settings")]
-    [SerializeField] Obstruction _obstructionPrefab;
-    [SerializeField] float _obstructionDuration = 10f;
+    [SerializeField] GameObject _obstructionPrefab;
     [SerializeField] int _chanceToSpawnObstruction = 10;
 
     [Header("Graphic Settings")]
     [SerializeField] Material m_specialDefense;
     [SerializeField] Material m_physicalDefense;
+
+    [Header("Feedback Settings")]
+    [SerializeField] AudioClip[] _chitterSFX;
+    [SerializeField] float _volume = 1;
     
     Player _nearestPlayer;
     Rigidbody _rb;
@@ -30,6 +33,7 @@ public class Swarmer : Enemy
     Transform _legSet1;
     Transform _legSet2;
     float _chompTimer = 0f;
+    float _soundTimer = 2f;
     float _moveModifier = 1f;
     float _targetFindInterval = 1f;
     bool _chomp;
@@ -51,6 +55,13 @@ public class Swarmer : Enemy
     {
         AnimateLegs();
         AnimateMouth();
+
+        _soundTimer += Time.deltaTime;
+        if (_soundTimer >= 1.5f && Random.Range(0, 101) <= 50)
+        {
+            AudioHelper.PlayClip3D(_chitterSFX[Random.Range(0, _chitterSFX.Length)], _volume, transform.position);
+            _soundTimer = 0;
+        }
     }
 
     protected override void FixedUpdate()
@@ -120,7 +131,7 @@ public class Swarmer : Enemy
 
     public override int GetSpawnCountOfTurn(int turn)
     {
-        int unit = (int)Mathf.Round(Mathf.Pow(1.5f, turn));
+        int unit = 5 * (int)Mathf.Round(Mathf.Pow(1.5f, turn)) + 10;
         int min = Mathf.Clamp(unit - 5, 1, unit);
         int max = unit + 5;
 
@@ -158,8 +169,7 @@ public class Swarmer : Enemy
     {
         Vector3 spawnRotation = new Vector3(0, Random.Range(0, 359.9f), 0);
         
-        Obstruction obstruction = Instantiate(_obstructionPrefab, transform.position, Quaternion.Euler(spawnRotation));
-        obstruction.Initialize(_obstructionDuration);
+        Instantiate(_obstructionPrefab, transform.position, Quaternion.Euler(spawnRotation));
     }
 
     void AnimateLegs()

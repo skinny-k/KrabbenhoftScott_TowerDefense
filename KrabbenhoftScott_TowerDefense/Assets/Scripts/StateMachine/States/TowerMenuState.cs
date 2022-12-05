@@ -49,9 +49,9 @@ public class TowerMenuState : TowerDefenseState
         // InputController.Instance.OnLMBPress += Method;
         // InputController.Instance.OnPassTurnPress += Method;
         // InputController.Instance.OnInteractPress += Method;
-        InputController.Instance.OnPausePress += Pause;
+        InputController.OnPausePress += Pause;
         // InputController.Instance.OnMutePress += Method;
-        InputController.Instance.OnAnyKeyPress += KeyPressed;
+        InputController.OnAnyKeyPress += KeyPressed;
     }
 
     void UnsubscribeToInput()
@@ -61,9 +61,9 @@ public class TowerMenuState : TowerDefenseState
         // InputController.Instance.OnLMBPress -= Method;
         // InputController.Instance.OnPassTurnPress -= Method;
         // InputController.Instance.OnInteractPress -= Method;
-        InputController.Instance.OnPausePress -= Pause;
+        InputController.OnPausePress -= Pause;
         // InputController.Instance.OnMutePress -= Method;
-        InputController.Instance.OnAnyKeyPress -= KeyPressed;
+        InputController.OnAnyKeyPress -= KeyPressed;
     }
 
     void Pause()

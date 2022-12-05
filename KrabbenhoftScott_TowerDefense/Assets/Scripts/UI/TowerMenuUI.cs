@@ -31,20 +31,6 @@ public class TowerMenuUI : MonoBehaviour
         
         TowerPlot.OnPlotClick += SetCurrentTowerPlot;
     }
-    
-    /*
-    void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-    */
 
     void Update()
     {
@@ -72,7 +58,7 @@ public class TowerMenuUI : MonoBehaviour
         {
             Instance.TowerMenu = Instance.UpgradeMenu;
 
-            if (Instance.CurrentPlot.CurrentTower.Level >= 4)
+            if (Instance.CurrentPlot.CurrentTower.Level >= 3)
             {
                 Instance.UpgradeMenu.gameObject.transform.GetChild(0).GetComponent<Button>().interactable = false;
             }

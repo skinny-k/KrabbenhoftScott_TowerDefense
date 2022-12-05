@@ -60,6 +60,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _travelSpeed: 15
+  _explodeParticles: {fileID: 2094650245419283730, guid: 0b7279d71298f41558c2851967c812cb, type: 3}
+  _explodeSFX: {fileID: 8300000, guid: b1734eeb0d78743358641e984d5a0b7f, type: 3}
+  _volume: 1
 --- !u!1 &4813121279164267459
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,8 @@ public class HealthBar : MonoBehaviour
     [SerializeField] float _easeDelay = 0.25f;
     [SerializeField] float _easeSpeed = 15f;
     [SerializeField] float _shakeTime = 0.25f;
+
+    public event Action OnTakeDamage;
     
     RectTransform _shakeCanvas;
     TMP_Text _healthText;
@@ -79,6 +81,7 @@ public class HealthBar : MonoBehaviour
     IEnumerator Shake()
     {
         _isShaking = true;
+        OnTakeDamage?.Invoke();
 
         yield return new WaitForSeconds(_shakeTime);
 

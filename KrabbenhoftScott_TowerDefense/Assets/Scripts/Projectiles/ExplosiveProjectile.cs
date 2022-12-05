@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class ExplosiveProjectile : Projectile
 {
+    [SerializeField] ParticleSystem _explodeParticles;
+    [SerializeField] AudioClip _explodeSFX;
+    [SerializeField] float _volume = 1;
+    
     SplashTower _originAsSplashTower;
     
     public override void InitializeProjectile(Tower origin, Enemy target, bool isSpecial)
@@ -26,7 +30,6 @@ public class ExplosiveProjectile : Projectile
     protected virtual void Explode()
     {
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, _originAsSplashTower.ExplosiveRadius, Vector3.forward);
-        
         ArrayList enemies = new ArrayList();
 
         foreach (RaycastHit hit in hits)
@@ -41,6 +44,15 @@ public class ExplosiveProjectile : Projectile
         foreach (Enemy enemy in enemies)
         {
             enemy.DecreaseHealth(_originAsSplashTower.ExplosiveDamage, false);
+        }
+
+        if (_explodeParticles != null)
+        {
+            Instantiate(_explodeParticles, transform.position, Quaternion.identity);
+        }
+        if (_explodeSFX != null)
+        {
+            AudioHelper.PlayClip3D(_explodeSFX, _volume, transform.position);
         }
     }
 }

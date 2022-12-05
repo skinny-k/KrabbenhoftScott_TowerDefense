@@ -24,8 +24,8 @@ public class LoseState : TowerDefenseState
 
     void SubscribeToInput()
     {
-        InputController.Instance.OnGameRestart += RestartGame;
-        InputController.Instance.OnGameQuit += QuitGame;
+        InputController.OnGameRestart += RestartGame;
+        InputController.OnGameQuit += QuitGame;
         
         // InputController.Instance.OnLMBPress += Method;
         // InputController.Instance.OnPassTurnPress += Method;
@@ -37,8 +37,8 @@ public class LoseState : TowerDefenseState
 
     void UnsubscribeToInput()
     {
-        InputController.Instance.OnGameRestart -= RestartGame;
-        InputController.Instance.OnGameQuit -= QuitGame;
+        InputController.OnGameRestart -= RestartGame;
+        InputController.OnGameQuit -= QuitGame;
         
         // InputController.Instance.OnLMBPress -= Method;
         // InputController.Instance.OnPassTurnPress -= Method;
