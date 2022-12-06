@@ -5,6 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(SM_TowerDefense))]
 public abstract class TowerDefenseState : MonoBehaviour, IState
 {
+    protected bool subscribed = false;
+    
     protected SM_TowerDefense StateMachine
     {
         get;
@@ -13,6 +15,7 @@ public abstract class TowerDefenseState : MonoBehaviour, IState
 
     public virtual void Awake()
     {
+        Debug.Log(gameObject.GetInstanceID());
         StateMachine = GetComponent<SM_TowerDefense>();
     }
 

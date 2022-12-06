@@ -173,7 +173,8 @@ public class Swarmer : Enemy
     {
         Vector3 spawnRotation = new Vector3(0, Random.Range(0, 359.9f), 0);
         
-        Instantiate(_obstructionPrefab, transform.position, Quaternion.Euler(spawnRotation));
+        GameObject obstruction = Instantiate(_obstructionPrefab, transform.position, Quaternion.Euler(spawnRotation));
+        obstruction.transform.localScale = transform.localScale;
     }
 
     void AnimateLegs()

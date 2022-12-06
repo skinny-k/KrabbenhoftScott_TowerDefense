@@ -11,8 +11,21 @@ public class EnemyPool : ObjectPool<Enemy>
 
     public override void ReturnToPool(Enemy enemyToReturn)
     {
-        EnemyTurnState.EnemiesInScene.Remove(enemyToReturn);
+        enemyToReturn.transform.localScale = new Vector3(1, 1, 1);
         
         base.ReturnToPool(enemyToReturn);
+    }
+
+    public bool HasActiveChildren()
+    {
+        for (int i = 0; i < transform.childCount; i++)
+        {
+            if (transform.GetChild(i).gameObject.activeSelf)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

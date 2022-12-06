@@ -97,18 +97,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _turnBody: {fileID: 5914213730647142531}
   _turnSpeed: 10
-  _range: 20
+  _range: 25
   _fireRate: 0.5
   _damage: 5
   _level: 0
-  _buildCost: 10
+  _buildCost: 20
   _upgradeCost: 10
   _levelChevrons:
   - {fileID: 1671628067192870724}
   - {fileID: 1315447893049081856}
   - {fileID: 3177256584535303777}
   _fireSFX: {fileID: 8300000, guid: a9de8771bd85a44588390a0f036652b0, type: 3}
-  _volume: 1
+  _volume: 0.5
   _projectileOrigin: {fileID: 5914213731202206544}
   _projectilePrefab: {fileID: 1496288343356024491, guid: 1ebca614fd5d64c3798f4601b8d4a29e, type: 3}
   _rangeIncrease: 3

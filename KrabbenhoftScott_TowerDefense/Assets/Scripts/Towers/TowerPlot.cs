@@ -111,7 +111,10 @@ public class TowerPlot : MonoBehaviour
 
     void DisplayBuildIndicator()
     {
-        _buildIndicator.gameObject.SetActive(true);
+        if (_currentTower == null || _currentTower.Level < 3)
+        {
+            _buildIndicator.gameObject.SetActive(true);
+        }
     }
 
     void HideBuildIndicator()

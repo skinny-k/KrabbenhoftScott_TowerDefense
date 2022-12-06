@@ -465,15 +465,15 @@ MonoBehaviour:
   _range: 20
   _fireRate: 1.75
   _damage: 10
-  _level: 1
-  _buildCost: 10
-  _upgradeCost: 10
+  _level: 0
+  _buildCost: 30
+  _upgradeCost: 15
   _levelChevrons:
   - {fileID: 6462244387948538836}
   - {fileID: 3174892830460562437}
   - {fileID: 2205161775833342312}
   _fireSFX: {fileID: 8300000, guid: a4971931c49684e7b876e4d6e387a590, type: 3}
-  _volume: 1
+  _volume: 0.25
   _projectileOrigin: {fileID: 2935548721628138784}
   _projectilePrefab: {fileID: 8639958332561407682, guid: 1f49e4a86063d43bb9a0aa704ea4f1c3, type: 3}
   _explosiveRadius: 2.5

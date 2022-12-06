@@ -305,7 +305,8 @@
 -r:"Library/Bee/artifacts/1900b0aP.dag/Unity.VisualScripting.Flow.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aP.dag/Unity.VisualScripting.State.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aP.dag/UnityEngine.UI.ref.dll"
-"Assets/Scripts/AudioHelper.cs"
+"Assets/Scripts/Audio/AudioHelper.cs"
+"Assets/Scripts/Audio/MusicPlayer.cs"
 "Assets/Scripts/CameraController.cs"
 "Assets/Scripts/Commands/CommandStack.cs"
 "Assets/Scripts/Commands/ICommand.cs"
@@ -318,6 +319,8 @@
 "Assets/Scripts/InputController.cs"
 "Assets/Scripts/Interfaces/IDamageable.cs"
 "Assets/Scripts/Interfaces/IHealable.cs"
+"Assets/Scripts/Object Pooling/EnemyPool.cs"
+"Assets/Scripts/Object Pooling/ObjectPool.cs"
 "Assets/Scripts/Obstruction.cs"
 "Assets/Scripts/Player/Player.cs"
 "Assets/Scripts/Player/PlayerMovement.cs"
@@ -345,7 +348,9 @@
 "Assets/Scripts/UI/MainMenuManager.cs"
 "Assets/Scripts/UI/PlayerHUD.cs"
 "Assets/Scripts/UI/TowerMenuUI.cs"
+"Assets/Scripts/UI/TurnIndicator.cs"
 "Assets/Scripts/UI/UIButtonManager.cs"
+"Assets/Scripts/WorldspaceIcon.cs"
 -langversion:9.0
 
 /deterministic

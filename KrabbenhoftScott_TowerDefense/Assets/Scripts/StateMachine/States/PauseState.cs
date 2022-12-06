@@ -16,7 +16,15 @@ public class PauseState : TowerDefenseState
         Time.timeScale = 0;
         Paused = true;
         OnPause?.Invoke();
-        SubscribeToInput();
+        // SubscribeToInput();
+    }
+
+    public override void Tick()
+    {
+        if (!subscribed)
+        {
+            SubscribeToInput();
+        }
     }
 
     public override void Exit()
@@ -51,20 +59,5 @@ public class PauseState : TowerDefenseState
     void Unpause()
     {
         StateMachine.RevertState();
-    }
-
-    void RestartGame()
-    {
-        SceneManager.LoadScene("Battlefield");
-    }
-
-    void ReturnToMenu()
-    {
-        SceneManager.LoadScene("MainMenu");
-    }
-    
-    void QuitGame()
-    {
-        Application.Quit();
     }
 }

@@ -12,7 +12,15 @@ public class LoseState : TowerDefenseState
     {
         Debug.Log("Entered LoseState");
         OnLoseStateEnter?.Invoke();
-        SubscribeToInput();
+        // SubscribeToInput();
+    }
+
+    public override void Tick()
+    {
+        if (!subscribed)
+        {
+            SubscribeToInput();
+        }
     }
 
     public override void Exit()
@@ -24,8 +32,8 @@ public class LoseState : TowerDefenseState
 
     void SubscribeToInput()
     {
-        InputController.OnGameRestart += RestartGame;
-        InputController.OnGameQuit += QuitGame;
+        // InputController.OnGameRestart += RestartGame;
+        // InputController.OnGameQuit += QuitGame;
         
         // InputController.Instance.OnLMBPress += Method;
         // InputController.Instance.OnPassTurnPress += Method;
@@ -37,8 +45,8 @@ public class LoseState : TowerDefenseState
 
     void UnsubscribeToInput()
     {
-        InputController.OnGameRestart -= RestartGame;
-        InputController.OnGameQuit -= QuitGame;
+        // InputController.OnGameRestart -= RestartGame;
+        // InputController.OnGameQuit -= QuitGame;
         
         // InputController.Instance.OnLMBPress -= Method;
         // InputController.Instance.OnPassTurnPress -= Method;

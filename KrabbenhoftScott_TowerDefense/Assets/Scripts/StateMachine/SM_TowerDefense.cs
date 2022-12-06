@@ -4,14 +4,17 @@ using UnityEngine;
 
 public class SM_TowerDefense : StateMachineBase
 {
+    /*
     public static SM_TowerDefense Instance
     {
         get;
         private set;
     }
+    */
     
     protected virtual void OnEnable()
     {
+        /*
         if (Instance == null)
         {
             Instance = this;
@@ -21,6 +24,7 @@ public class SM_TowerDefense : StateMachineBase
         {
             Destroy(gameObject);
         }
+        */
         
         InputController.OnQuitPress += QuitGame;
     }
@@ -40,6 +44,7 @@ public class SM_TowerDefense : StateMachineBase
         InputController.OnQuitPress -= QuitGame;
     }
     
+    /*
     protected virtual void OnDestroy()
     {
         if (Instance == this)
@@ -47,4 +52,5 @@ public class SM_TowerDefense : StateMachineBase
             Instance = null;
         }
     }
+    */
 }

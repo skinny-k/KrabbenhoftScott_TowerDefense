@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class EnemyTurnState : TowerDefenseState
 {
-    public static ArrayList EnemiesInScene = new ArrayList();
+    [SerializeField] EnemyPool _enemyPool;
+    
     public static ArrayList PlayersInScene = new ArrayList();
     
     public static int Turn;
@@ -27,11 +28,16 @@ public class EnemyTurnState : TowerDefenseState
         Turn++;
         _timeThisTurn = 0f;
         OnEnemyTurnBegin?.Invoke();
-        SubscribeToInput();
+        // SubscribeToInput();
     }
 
     public override void Tick()
     {
+        if (!subscribed)
+        {
+            SubscribeToInput();
+        }
+        
         _timeThisTurn += Time.deltaTime;
 
         if (PlayersInScene.Count == 0 && _timeThisTurn >= 2f)
@@ -39,7 +45,7 @@ public class EnemyTurnState : TowerDefenseState
             StateMachine.ChangeState<LoseState>();
         }
         
-        if (EnemiesInScene.Count == 0 && _timeThisTurn >= 2f)
+        if (!_enemyPool.HasActiveChildren() && _timeThisTurn >= 2f)
         {
             StartCoroutine(PassTurn());
         }

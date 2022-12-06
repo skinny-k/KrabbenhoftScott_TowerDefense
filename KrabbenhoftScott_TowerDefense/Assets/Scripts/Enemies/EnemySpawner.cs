@@ -11,6 +11,5 @@ public class EnemySpawner : MonoBehaviour
         Vector3 spawnAt = _spawnNodes[Random.Range(0, _spawnNodes.Length)].position;
         Enemy enemySpawned = enemyPool.ActivateFromPool();
         enemySpawned.transform.position = spawnAt;
-        EnemyTurnState.EnemiesInScene.Add(enemySpawned);
     }
 }

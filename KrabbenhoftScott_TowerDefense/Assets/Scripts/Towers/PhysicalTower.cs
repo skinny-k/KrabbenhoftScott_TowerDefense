@@ -24,7 +24,7 @@ public class PhysicalTower : Tower
         {
             Projectile projectile = Instantiate(_projectilePrefab, _projectileOrigin.position, _projectileOrigin.rotation);
             projectile.InitializeProjectile(this, _target, false);
-            AudioHelper.PlayClip3D(_fireSFX, _volume, transform.position);
+            AudioHelper.PlayClip2D(_fireSFX, _volume);
         }
 
         _target = FindTarget();

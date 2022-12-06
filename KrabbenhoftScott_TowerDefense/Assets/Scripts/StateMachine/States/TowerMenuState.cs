@@ -21,11 +21,16 @@ public class TowerMenuState : TowerDefenseState
         OnTowerMenuOpen?.Invoke();
         TowerMenuUI.UpdateMenuContent();
         TowerMenuUI.OpenMenu();
-        SubscribeToInput();
+        // SubscribeToInput();
     }
 
     public override void Tick()
     {
+        if (!subscribed)
+        {
+            SubscribeToInput();
+        }
+        
         _active = true;
 
         TowerMenuUI.UpdateMenuPlacement();

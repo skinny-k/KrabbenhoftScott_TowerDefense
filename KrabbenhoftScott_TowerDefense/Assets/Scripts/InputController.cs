@@ -5,8 +5,6 @@ using UnityEngine;
 
 public class InputController : MonoBehaviour
 {
-    public static InputController Instance;
-
     [SerializeField] KeyCode _passTurnKey = KeyCode.Q;
     [SerializeField] KeyCode _interactKey = KeyCode.Space;
     [SerializeField] KeyCode _pauseKey = KeyCode.Escape;
@@ -23,21 +21,6 @@ public class InputController : MonoBehaviour
     public static event Action OnAnyKeyPress;
 
     public static event Action OnGameContinue;
-    public static event Action OnGameRestart;
-    public static event Action OnGameQuit;
-
-    void OnEnable()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            // DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     void Update()
     {
@@ -126,23 +109,5 @@ public class InputController : MonoBehaviour
     public void InvokeGameContinue()
     {
         OnGameContinue?.Invoke();
-    }
-    
-    public void InvokeGameRestart()
-    {
-        OnGameRestart?.Invoke();
-    }
-
-    public void InvokeGameQuit()
-    {
-        OnGameQuit?.Invoke();
-    }
-
-    void OnDestroy()
-    {
-        if (Instance == this)
-        {
-            Instance = null;
-        }
     }
 }

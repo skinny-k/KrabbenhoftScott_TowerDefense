@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class UIButtonManager : MonoBehaviour
@@ -11,7 +10,6 @@ public class UIButtonManager : MonoBehaviour
     [SerializeField] GameObject _pauseMenu;
     [SerializeField] Button _pauseButton;
     [SerializeField] Button _passTurnButton;
-    [SerializeField] string _mainMenuScene = "Main Menu";
     [SerializeField] SM_TowerDefense StateMachine;
 
     void OnEnable()
@@ -53,20 +51,5 @@ public class UIButtonManager : MonoBehaviour
 
         PlayerTurnState.OnPlayerTurnBegin -= UpdatePassTurnButton;
         PlayerTurnState.OnPlayerTurnEnd -= UpdatePassTurnButton;
-    }
-
-    public void ReturnToMainMenu()
-    {
-        SceneManager.LoadScene(_mainMenuScene);
-    }
-    
-    public void RestartGame()
-    {
-        StateMachine.ChangeState<InitializationState>();
-    }
-    
-    public void QuitGame()
-    {
-        Application.Quit();
     }
 }

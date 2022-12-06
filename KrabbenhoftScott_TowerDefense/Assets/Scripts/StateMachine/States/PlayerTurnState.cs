@@ -14,7 +14,15 @@ public class PlayerTurnState : TowerDefenseState
         Debug.Log("Entered PlayerTurnState");
         InPlayerTurn = true;
         OnPlayerTurnBegin?.Invoke();
-        SubscribeToInput();
+        // SubscribeToInput();
+    }
+
+    public override void Tick()
+    {
+        if (!subscribed)
+        {
+            SubscribeToInput();
+        }
     }
 
     public override void Exit()
@@ -35,6 +43,8 @@ public class PlayerTurnState : TowerDefenseState
         InputController.OnPausePress += Pause;
         // InputController.Instance.OnMutePress += Method;
         // InputController.Instance.OnAnyKeyPress += Method;
+
+        subscribed = true;
     }
 
     void UnsubscribeToInput()
@@ -47,6 +57,8 @@ public class PlayerTurnState : TowerDefenseState
         InputController.OnPausePress -= Pause;
         // InputController.Instance.OnMutePress -= Method;
         // InputController.Instance.OnAnyKeyPress -= Method;
+
+        subscribed = false;
     }
 
     void OpenTowerMenu(TowerPlot plot)

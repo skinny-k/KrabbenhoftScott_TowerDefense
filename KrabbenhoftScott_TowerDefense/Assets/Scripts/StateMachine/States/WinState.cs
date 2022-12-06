@@ -12,7 +12,15 @@ public class WinState : TowerDefenseState
     {
         Debug.Log("Entered WinState");
         OnWinStateEnter?.Invoke();
-        SubscribeToInput();
+        // SubscribeToInput();
+    }
+
+    public override void Tick()
+    {
+        if (!subscribed)
+        {
+            SubscribeToInput();
+        }
     }
 
     public override void Exit()
@@ -25,8 +33,8 @@ public class WinState : TowerDefenseState
     void SubscribeToInput()
     {
         InputController.OnGameContinue += ReturnToGame;
-        InputController.OnGameRestart += RestartGame;
-        InputController.OnGameQuit += QuitGame;
+        // InputController.OnGameRestart += RestartGame;
+        // InputController.OnGameQuit += QuitGame;
         
         // InputController.Instance.OnLMBPress += Method;
         // InputController.Instance.OnPassTurnPress += Method;
@@ -39,8 +47,8 @@ public class WinState : TowerDefenseState
     void UnsubscribeToInput()
     {
         InputController.OnGameContinue -= ReturnToGame;
-        InputController.OnGameRestart -= RestartGame;
-        InputController.OnGameQuit -= QuitGame;
+        // InputController.OnGameRestart -= RestartGame;
+        // InputController.OnGameQuit -= QuitGame;
         
         // InputController.Instance.OnLMBPress -= Method;
         // InputController.Instance.OnPassTurnPress -= Method;

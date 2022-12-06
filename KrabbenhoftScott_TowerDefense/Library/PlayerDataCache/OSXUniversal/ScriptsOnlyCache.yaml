@@ -3,6 +3,7 @@ ScriptsOnlyBuild:
     Assembly-CSharp.dll:
     - CameraController
     - EndgameMenuUI
+    - EnemyPool
     - EnemySpawner
     - EnemyTurnState
     - ExplosiveProjectile
@@ -13,8 +14,7 @@ ScriptsOnlyBuild:
     - InputController
     - LevelSpawner
     - LoseState
-    - MainMenuManager
-    - Obstruction
+    - MusicPlayer
     - PauseState
     - PhysicalTower
     - Player
@@ -30,8 +30,10 @@ ScriptsOnlyBuild:
     - TowerMenuState
     - TowerMenuUI
     - TowerPlot
+    - TurnIndicator
     - UIButtonManager
     - WinState
+    - WorldspaceIcon
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
     Unity.TextMeshPro.dll:
@@ -87,11 +89,17 @@ ScriptsOnlyBuild:
     - UnityEngine.UI.SpriteState
   methodsToPreserve:
   - assembly: Assembly-CSharp
-    fullTypeName: MainMenuManager
-    methodName: StartGame
+    fullTypeName: GameController
+    methodName: Quit
   - assembly: Assembly-CSharp
-    fullTypeName: MainMenuManager
-    methodName: QuitGame
+    fullTypeName: GameController
+    methodName: LoadScene
+  - assembly: Assembly-CSharp
+    fullTypeName: GameController
+    methodName: LoadScene
+  - assembly: Assembly-CSharp
+    fullTypeName: GameController
+    methodName: LoadScene
   - assembly: Assembly-CSharp
     fullTypeName: TowerMenuUI
     methodName: DestroyTower
@@ -105,29 +113,38 @@ ScriptsOnlyBuild:
     fullTypeName: InputController
     methodName: InvokeGameContinue
   - assembly: Assembly-CSharp
+    fullTypeName: GameController
+    methodName: LoadScene
+  - assembly: Assembly-CSharp
     fullTypeName: TowerMenuUI
     methodName: BuildSplashTower
   - assembly: Assembly-CSharp
     fullTypeName: TowerMenuUI
     methodName: UpgradeTower
   - assembly: Assembly-CSharp
+    fullTypeName: GameController
+    methodName: LoadScene
+  - assembly: Assembly-CSharp
+    fullTypeName: GameController
+    methodName: Quit
+  - assembly: Assembly-CSharp
     fullTypeName: TowerMenuUI
     methodName: BuildSpecialTower
   - assembly: Assembly-CSharp
-    fullTypeName: InputController
-    methodName: InvokeGameQuit
+    fullTypeName: GameController
+    methodName: Quit
   - assembly: Assembly-CSharp
-    fullTypeName: InputController
-    methodName: InvokeGameQuit
+    fullTypeName: GameController
+    methodName: Quit
   - assembly: Assembly-CSharp
     fullTypeName: InputController
     methodName: InvokePassTurnPress
   - assembly: Assembly-CSharp
-    fullTypeName: InputController
-    methodName: InvokeGameRestart
+    fullTypeName: GameController
+    methodName: LoadScene
   - assembly: Assembly-CSharp
-    fullTypeName: InputController
-    methodName: InvokeGameRestart
+    fullTypeName: GameController
+    methodName: LoadScene
   sceneClasses:
     Assets/Scenes/Battlefield.unity:
     - Class: 1
@@ -156,6 +173,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
     - Class: 83
       Script: {instanceID: 0}
     - Class: 89
@@ -173,77 +192,81 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1778}
     - Class: 114
-      Script: {instanceID: 2414}
+      Script: {instanceID: 2056}
     - Class: 114
-      Script: {instanceID: 2556}
+      Script: {instanceID: 2416}
     - Class: 114
-      Script: {instanceID: 2646}
+      Script: {instanceID: 2558}
     - Class: 114
-      Script: {instanceID: 2874}
+      Script: {instanceID: 2648}
     - Class: 114
-      Script: {instanceID: 2886}
+      Script: {instanceID: 2876}
     - Class: 114
-      Script: {instanceID: 3024}
+      Script: {instanceID: 2888}
     - Class: 114
-      Script: {instanceID: 3068}
+      Script: {instanceID: 2934}
     - Class: 114
-      Script: {instanceID: 3180}
+      Script: {instanceID: 3028}
     - Class: 114
-      Script: {instanceID: 3206}
+      Script: {instanceID: 3072}
     - Class: 114
-      Script: {instanceID: 3254}
+      Script: {instanceID: 3184}
     - Class: 114
-      Script: {instanceID: 3274}
+      Script: {instanceID: 3210}
     - Class: 114
-      Script: {instanceID: 3674}
+      Script: {instanceID: 3258}
     - Class: 114
-      Script: {instanceID: 3688}
+      Script: {instanceID: 3278}
     - Class: 114
-      Script: {instanceID: 3746}
+      Script: {instanceID: 3678}
     - Class: 114
-      Script: {instanceID: 3786}
+      Script: {instanceID: 3692}
     - Class: 114
-      Script: {instanceID: 4198}
+      Script: {instanceID: 3790}
     - Class: 114
-      Script: {instanceID: 4304}
+      Script: {instanceID: 4202}
     - Class: 114
-      Script: {instanceID: 4320}
+      Script: {instanceID: 4308}
     - Class: 114
-      Script: {instanceID: 5022}
+      Script: {instanceID: 4324}
     - Class: 114
-      Script: {instanceID: 5152}
+      Script: {instanceID: 4712}
     - Class: 114
-      Script: {instanceID: 5218}
+      Script: {instanceID: 5030}
     - Class: 114
-      Script: {instanceID: 5308}
+      Script: {instanceID: 5160}
     - Class: 114
-      Script: {instanceID: 5518}
+      Script: {instanceID: 5226}
     - Class: 114
-      Script: {instanceID: 5636}
+      Script: {instanceID: 5316}
     - Class: 114
-      Script: {instanceID: 5740}
+      Script: {instanceID: 5526}
     - Class: 114
-      Script: {instanceID: 5922}
+      Script: {instanceID: 5564}
     - Class: 114
-      Script: {instanceID: 5966}
+      Script: {instanceID: 5646}
     - Class: 114
-      Script: {instanceID: 6076}
+      Script: {instanceID: 5750}
     - Class: 114
-      Script: {instanceID: 6110}
+      Script: {instanceID: 5932}
     - Class: 114
-      Script: {instanceID: 6420}
+      Script: {instanceID: 5976}
     - Class: 114
-      Script: {instanceID: 6534}
+      Script: {instanceID: 6086}
     - Class: 114
-      Script: {instanceID: 6950}
+      Script: {instanceID: 6120}
     - Class: 114
-      Script: {instanceID: 7238}
+      Script: {instanceID: 6430}
     - Class: 114
-      Script: {instanceID: 7284}
+      Script: {instanceID: 6544}
     - Class: 114
-      Script: {instanceID: 41274}
+      Script: {instanceID: 6962}
     - Class: 114
-      Script: {instanceID: 51542}
+      Script: {instanceID: 7250}
+    - Class: 114
+      Script: {instanceID: 7296}
+    - Class: 114
+      Script: {instanceID: 7474}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -256,6 +279,12 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 196
       Script: {instanceID: 0}
+    - Class: 198
+      Script: {instanceID: 0}
+    - Class: 199
+      Script: {instanceID: 0}
+    - Class: 212
+      Script: {instanceID: 0}
     - Class: 213
       Script: {instanceID: 0}
     - Class: 222
@@ -264,7 +293,7 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 224
       Script: {instanceID: 0}
-    Assets/Scenes/MainMenu.unity:
+    Assets/Scenes/Main Menu.unity:
     - Class: 1
       Script: {instanceID: 0}
     - Class: 4
@@ -281,6 +310,10 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 81
       Script: {instanceID: 0}
+    - Class: 82
+      Script: {instanceID: 0}
+    - Class: 83
+      Script: {instanceID: 0}
     - Class: 89
       Script: {instanceID: 0}
     - Class: 104
@@ -290,27 +323,29 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1586}
     - Class: 114
-      Script: {instanceID: 2208}
+      Script: {instanceID: 2210}
     - Class: 114
-      Script: {instanceID: 2646}
+      Script: {instanceID: 2416}
     - Class: 114
-      Script: {instanceID: 2722}
+      Script: {instanceID: 2648}
     - Class: 114
-      Script: {instanceID: 2874}
+      Script: {instanceID: 2876}
     - Class: 114
-      Script: {instanceID: 3180}
+      Script: {instanceID: 3184}
     - Class: 114
-      Script: {instanceID: 4268}
+      Script: {instanceID: 4272}
     - Class: 114
-      Script: {instanceID: 4540}
+      Script: {instanceID: 4546}
     - Class: 114
-      Script: {instanceID: 5308}
+      Script: {instanceID: 5316}
     - Class: 114
-      Script: {instanceID: 5922}
+      Script: {instanceID: 5932}
     - Class: 114
-      Script: {instanceID: 6076}
+      Script: {instanceID: 6086}
     - Class: 114
-      Script: {instanceID: 6420}
+      Script: {instanceID: 6430}
+    - Class: 114
+      Script: {instanceID: 6944}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -396,6 +431,12 @@ ScriptsOnlyBuild:
     className: UnityOnMouseExitMessageListener
   - hash:
       serializedVersion: 2
+      Hash: fc68400dfc5e60ed25b6a3f72b2d25b3
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: EnemyPool
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
@@ -450,7 +491,7 @@ ScriptsOnlyBuild:
     className: UnityOnBecameVisibleMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 18478f4429100174b582b1554f328238
+      Hash: b1c048490601c113242de9bb99c17a1d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LevelSpawner
@@ -516,7 +557,7 @@ ScriptsOnlyBuild:
     className: GraphicRaycaster
   - hash:
       serializedVersion: 2
-      Hash: 4d5aa3daab65bc831081c471f9a20608
+      Hash: 664a187b9c62af00c9bff95864d62898
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ExplosiveProjectile
@@ -538,6 +579,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.TextMeshPro.dll
     namespaceName: TMPro
     className: TMP_SpriteAnimator
+  - hash:
+      serializedVersion: 2
+      Hash: b41ec994c58fc771884ae3a80b366d87
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PlayerHUD
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -570,7 +617,7 @@ ScriptsOnlyBuild:
     className: UnityOnDropdownValueChangedMessageListener
   - hash:
       serializedVersion: 2
-      Hash: f6afa19268dc2252fc00cbbc45c4b84f
+      Hash: db7310859c0754b233ba6a37e7b341d7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SpecialTower
@@ -588,7 +635,7 @@ ScriptsOnlyBuild:
     className: Button
   - hash:
       serializedVersion: 2
-      Hash: 1c6746ba437421e507511647af6db47a
+      Hash: 918cb9fa07953640d454d1674b8f1045
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: UIButtonManager
@@ -756,7 +803,7 @@ ScriptsOnlyBuild:
     className: SignalReceiver
   - hash:
       serializedVersion: 2
-      Hash: 685269accc2aae45d41fa44c65c49756
+      Hash: 1e4f6f8d812ac12f0bc1e81b50e86d83
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TowerPlot
@@ -834,6 +881,12 @@ ScriptsOnlyBuild:
     className: UnityOnCancelMessageListener
   - hash:
       serializedVersion: 2
+      Hash: 1398218e6f8cc5d3f862d1ca4742af87
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: TurnIndicator
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
@@ -870,7 +923,7 @@ ScriptsOnlyBuild:
     className: UnityOnEndDragMessageListener
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 8d2e64ba4c862128cff29d9d4250b43c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: EnemyTurnState
@@ -894,7 +947,7 @@ ScriptsOnlyBuild:
     className: TMP_InputField
   - hash:
       serializedVersion: 2
-      Hash: 3376d56c6c8463d905560c1898ea71aa
+      Hash: ff473e5f2435672e6fc74ffcd6f15e71
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Swarmer
@@ -960,6 +1013,12 @@ ScriptsOnlyBuild:
     className: GroupTrack
   - hash:
       serializedVersion: 2
+      Hash: 51f1520f2c6c1bbe50908344b3034490
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: WorldspaceIcon
+  - hash:
+      serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
@@ -1020,7 +1079,7 @@ ScriptsOnlyBuild:
     className: TextMeshProUGUI
   - hash:
       serializedVersion: 2
-      Hash: 12ca7258d4d7c0229bb7f8857a6d7aeb
+      Hash: ca1f1e9d805238d435322c22194a46f3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: SplashTower
@@ -1062,7 +1121,7 @@ ScriptsOnlyBuild:
     className: BeforeAfterTestCommandState
   - hash:
       serializedVersion: 2
-      Hash: f6afa19268dc2252fc00cbbc45c4b84f
+      Hash: db7310859c0754b233ba6a37e7b341d7
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: PhysicalTower
@@ -1102,6 +1161,12 @@ ScriptsOnlyBuild:
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
     className: VerticalLayoutGroup
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MusicPlayer
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -1200,6 +1265,12 @@ ScriptsOnlyBuild:
     className: UnityOnMoveMessageListener
   - hash:
       serializedVersion: 2
+      Hash: ab83854202a8ebfc19cd7a334c577879
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: HealthBar
+  - hash:
+      serializedVersion: 2
       Hash: c3d3430df9e3ea95e3e3d587961390fb
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -1276,20 +1347,8 @@ ScriptsOnlyBuild:
     assemblyName: Unity.VisualScripting.Core.dll
     namespaceName: Unity.VisualScripting
     className: UnityOnSliderValueChangedMessageListener
-  - hash:
-      serializedVersion: 2
-      Hash: b1f42e1bdd17cdbac0f103a2ca33dc0b
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: PlayerHUD
-  - hash:
-      serializedVersion: 2
-      Hash: ab83854202a8ebfc19cd7a334c577879
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: HealthBar
   platform: 2
   scenePathNames:
-  - Assets/Scenes/MainMenu.unity
+  - Assets/Scenes/Main Menu.unity
   - Assets/Scenes/Battlefield.unity
-  playerPath: /Users/scott/Desktop/school_stuff/22f/scripting for games 2/KrabbenhoftScott_TowerDefense/KrabbenhoftScott_TowerDefense/Builds/KrabbenhoftScott_P02C_mac.app
+  playerPath: /Users/scott/Desktop/school_stuff/22f/scripting for games 2/KrabbenhoftScott_TowerDefense/KrabbenhoftScott_TowerDefense/Builds/P02E/KrabbenhoftScott_P02E_mac.app
